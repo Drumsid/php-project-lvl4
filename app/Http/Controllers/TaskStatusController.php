@@ -85,7 +85,6 @@ class TaskStatusController extends Controller
         $data = $this->validate($request, [
             'name' => 'required'
         ]);
-    
         $taskStatus->fill($data);
         $taskStatus->save();
         flash('Статус успешно отредактирован!')->success();

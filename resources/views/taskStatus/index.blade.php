@@ -4,8 +4,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <h2>Статусы</h2>
-            <a class="btn btn-primary" href="{{ route('task_statuses.create') }}" role="button">Добавить статус</a>
+            <h2 class="mb-5">Статусы</h2>
+            @auth
+              <a class="btn btn-primary mb-5" href="{{ route('task_statuses.create') }}" role="button">Добавить статус</a>
+            @endauth
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -13,7 +15,9 @@
                         <th scope="col">ID</th>
                         <th scope="col">Имя</th>
                         <th scope="col">Дата создания</th>
-                        <th scope="col">Действия</th>
+                        @auth
+                          <th scope="col">Действия</th>
+                        @endauth
                       </tr>
                     </thead>
                     @if (count($taskStatuses))
@@ -23,6 +27,7 @@
                         <th>{{ $status->id }}</th>
                         <td>{{ $status->name }}</td>
                         <td>{{ $status->updated_at }}</td>
+                        @auth
                         <td>
                             <a href="{{ route('task_statuses.edit', ['task_status' => $status->id]) }}" class="btn btn-info btn-sm float-left mr-1">
                                 редактировать
@@ -36,6 +41,7 @@
                                 </button>
                             </form>
                         </td>
+                        @endauth
                       </tr>
                       @endforeach
                     @else
