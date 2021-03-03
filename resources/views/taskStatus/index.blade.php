@@ -4,19 +4,19 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <h2 class="mb-5">Статусы</h2>
+            <h2 class="mb-5">{{ __('messages.Statuses') }}</h2>
             @auth
-              <a class="btn btn-primary mb-5" href="{{ route('task_statuses.create') }}" role="button">Добавить статус</a>
+              <a class="btn btn-primary mb-5" href="{{ route('task_statuses.create') }}" role="button">{{ __('messages.Add status') }}</a>
             @endauth
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                       <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Имя</th>
-                        <th scope="col">Дата создания</th>
+                        <th scope="col">{{ __('messages.Name') }}</th>
+                        <th scope="col">{{ __('messages.Date of creation') }}</th>
                         @auth
-                          <th scope="col">Действия</th>
+                          <th scope="col">{{ __('messages.Actions') }}</th>
                         @endauth
                       </tr>
                     </thead>
@@ -30,14 +30,14 @@
                         @auth
                         <td>
                             <a href="{{ route('task_statuses.edit', ['task_status' => $status->id]) }}" class="btn btn-info btn-sm float-left mr-1">
-                                редактировать
+                                {{ __('messages.edit') }}
                             </a>
                             <form action="{{ route('task_statuses.destroy', ['task_status' => $status->id]) }}" method="post" class="float-left">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm"
                                         onclick="return confirm('Подтвердите удаление')">
-                                    удалить
+                                    {{ __('messages.delete') }}
                                 </button>
                             </form>
                         </td>
@@ -45,7 +45,7 @@
                       </tr>
                       @endforeach
                     @else
-                    <th>Статусов пока нет...</th>
+                    <th>{{ __('messages.No statuses yet ...') }}</th>
                     @endif
                     </tbody>
                   </table>
