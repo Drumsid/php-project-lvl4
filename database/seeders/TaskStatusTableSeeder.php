@@ -22,6 +22,5 @@ class TaskStatusTableSeeder extends Seeder
             ['name' => 'завершен', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
         ];
         DB::table('task_statuses')->insert($statuses);
-
     }
 }
