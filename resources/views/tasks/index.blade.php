@@ -31,9 +31,7 @@
                         <th>{{ $task->id }}</th>
                         <td>{{ $task->name }}</td>
                         <td>{{ $task->description }}</td>
-                        {{-- {{dd($task->statuses)}} --}}
-                        <td>{{ $task->status_id }}</td>
-                        {{-- <td>{{ $task->statuses->name }}</td> --}}
+                        <td>{{ $task->status->name }}</td>
                         {{-- {{dd($task->user)}} --}}
                         <td>{{ $task->created_by_id }}</td>
                         <td>Assigned</td>

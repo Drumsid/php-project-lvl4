@@ -9,6 +9,7 @@ setup:
 	touch database/database.sqlite || true
 	php artisan migrate
 	npm install
+	npm run dev
 
 watch:
 	npm run watch

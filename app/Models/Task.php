@@ -17,12 +17,14 @@ class Task extends Model
         'assigned_to_id'
     ];
 
-    public function statuses()
+    public function status()
     {
-        return $this->hasMany(TaskStatus::class, 'id');
+        // return $this->hasMany(TaskStatus::class);
+        return $this->belongsTo(TaskStatus::class);
     }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        // return $this->belongsTo(User::class);
+        return $this->hasMany(User::class);
     }
 }
