@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Task;
 use App\Models\TaskStatus;
+use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
-class TaskStatusController extends Controller
+class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +17,8 @@ class TaskStatusController extends Controller
      */
     public function index()
     {
-        $taskStatuses = TaskStatus::all();
-        return view('taskStatus.index', compact('taskStatuses'));
+        $tasks = Task::all();
+        return view('tasks.index', compact('tasks'));
     }
 
     /**
@@ -25,8 +28,10 @@ class TaskStatusController extends Controller
      */
     public function create()
     {
-        $taskStatus = new TaskStatus();
-        return view('taskStatus.create', compact('taskStatus'));
+        $task = new Task();
+        $taskStatuses = TaskStatus::pluck('name', 'id')->all();
+        $users = User::pluck('name', 'id')->all();
+        return view('tasks.create', compact('task', 'taskStatuses', 'users'));
     }
 
     /**
@@ -37,16 +42,21 @@ class TaskStatusController extends Controller
      */
     public function store(Request $request)
     {
+        // $formData = $request->all();
+        // dd($request->all());
+        // $formData['created_by_id'] = auth()->user()->id;
         $data = $this->validate($request, [
             'name' => 'required|min:3',
+            'status_id' => 'required',
+            'created_by_id' => 'required',
         ]);
-
-        $taskStatus = new TaskStatus();
-        $taskStatus->fill($data);
-        $taskStatus->save();
-        flash(__('messages.Status added successfully!'))->success();
+        // dd($data);
+        $task = new Task();
+        $task->fill($data);
+        $task->save();
+        flash(__('messages.Task added successfully!'))->success();
         return redirect()
-            ->route('task_statuses.index');
+            ->route('tasks.index');
     }
 
     /**
@@ -68,8 +78,7 @@ class TaskStatusController extends Controller
      */
     public function edit($id)
     {
-        $taskStatus = TaskStatus::findOrFail($id);
-        return view('taskStatus.edit', compact('taskStatus'));
+        //
     }
 
     /**
@@ -81,15 +90,7 @@ class TaskStatusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $taskStatus = TaskStatus::findOrFail($id);
-        $data = $this->validate($request, [
-            'name' => 'required'
-        ]);
-        $taskStatus->fill($data);
-        $taskStatus->save();
-        flash(__('messages.Status edited successfully!'))->success();
-        return redirect()
-            ->route('task_statuses.index');
+        //
     }
 
     /**
@@ -100,11 +101,6 @@ class TaskStatusController extends Controller
      */
     public function destroy($id)
     {
-        $taskStatus = TaskStatus::find($id);
-        if ($taskStatus) {
-            $taskStatus->delete();
-            flash(__('messages.Status deleted successfully!'))->success();
-        }
-        return redirect()->route('task_statuses.index');
+        //
     }
 }

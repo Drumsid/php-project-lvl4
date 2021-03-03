@@ -38,4 +38,10 @@ return [
     'Edit status' => 'Редактировать статус',
     'Status edited successfully!' => 'Статус успешно отредактирован!',
     'Status deleted successfully!' => 'Статус успешно удален!',
+    'Tasks' => 'Задачи',
+    'Add task' => 'Добавить задачу',
+    'Description' => 'Описание',
+    'User' => 'Пользователь',
+    'Assigned' => 'Исполнитель',
+    'Status' => 'Статус',
 ];
