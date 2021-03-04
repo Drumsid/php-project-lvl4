@@ -33,7 +33,7 @@
                         <td>{{ $task->description }}</td>
                         {{-- {{dd($task->status)}} --}}
                         <td>{{ $task->status->name }}</td>
-                        {{-- {{dd($task->created_by->tasks)}} --}}
+                        {{-- {{dd($task->created_by->tasks->dd())}} --}}
                         <td>{{ $task->created_by->name }}</td>
                         <td>Assigned</td>
                         <td>{{ $task->updated_at }}</td>
