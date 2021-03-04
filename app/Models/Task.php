@@ -19,12 +19,14 @@ class Task extends Model
 
     public function status()
     {
-        // return $this->hasMany(TaskStatus::class);
         return $this->belongsTo(TaskStatus::class);
     }
-    public function user()
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class, 'created_by_id');
+    // }
+    public function created_by()
     {
         return $this->belongsTo(User::class);
-        // return $this->hasMany(User::class);
     }
 }
