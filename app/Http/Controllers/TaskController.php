@@ -42,16 +42,14 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        // $formData = $request->all();
         // dd($request->all());
-        // $formData['created_by_id'] = auth()->user()->id;
         $data = $this->validate($request, [
             'name' => 'required|min:3',
             'status_id' => 'required',
             'created_by_id' => 'required',
+            'assigned_to_id' => 'nullable',
             'description' => 'nullable',
         ]);
-        // dd($data);
         $task = new Task();
         $task->fill($data);
         $task->save();
@@ -81,7 +79,11 @@ class TaskController extends Controller
     {
         $task = Task::find($id);
         $taskStatuses = TaskStatus::where('id', '!=', $task->status->id)->pluck('name', 'id')->all();
-        return view('tasks.edit', compact('task', 'taskStatuses'));
+        if ($task->assigned_to) {
+            $users = User::where('id', '!=', $task->assigned_to->id)->pluck('name', 'id')->all();
+        }
+        $users = User::pluck('name', 'id')->all();
+        return view('tasks.edit', compact('task', 'taskStatuses', 'users'));
     }
 
     /**
@@ -97,8 +99,9 @@ class TaskController extends Controller
         $data = $this->validate($request, [
             'name' => 'required|min:3',
             'status_id' => 'required',
-            'created_by_id' => 'required',
+            // 'created_by_id' => 'required',
             'description' => 'nullable',
+            'assigned_to_id' => 'nullable',
         ]);
         $task->fill($data);
         $task->save();

@@ -17,7 +17,7 @@
             <form method="post" action="{{route('tasks.update', $task)}}">
                 @csrf
                 @method('PUT')
-                <input type="hidden" name="created_by_id" value="{{ auth()->user()->id }}">
+                {{-- <input type="hidden" name="created_by_id" value="{{ auth()->user()->id }}"> --}}
                 <div class="form-group">
                   <label for="exampleFormControlInput1">Name</label>
                   <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="" value="{{$task->name}}">
@@ -35,25 +35,19 @@
                     @endforeach
                   </select>
                 </div>
-                {{-- <div class="form-group">
+                <div class="form-group">
                   <label for="exampleFormControlSelect1">Assigned</label>
                   <select class="form-control" id="exampleFormControlSelect1" name="assigned_to_id">
+                    @if($task->assigned_to === null)
+                    <option>---------</option>
+                    @else
+                    <option value="{{$task->assigned_to->id}}">{{$task->assigned_to->name}}</option>
+                    @endif
                     @foreach($users as $id => $name)
                         <option value="{{$id}}">{{$name}}</option>
                     @endforeach
                   </select>
-                </div> --}}
-                {{-- <div class="form-group">
-                  <label for="exampleFormControlSelect2">Example multiple select</label>
-                  <select multiple class="form-control" id="exampleFormControlSelect2">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                </div> --}}
-
+                </div>
                 <button type="submit" class="btn btn-primary">{{__('messages.Send')}}</button>
               </form>
         </div>

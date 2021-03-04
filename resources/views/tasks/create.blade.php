@@ -45,22 +45,12 @@
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Assigned</label>
                   <select class="form-control" id="exampleFormControlSelect1" name="assigned_to_id">
+                    <option value="">------</option>
                     @foreach($users as $id => $name)
                         <option value="{{$id}}">{{$name}}</option>
                     @endforeach
                   </select>
                 </div>
-                {{-- <div class="form-group">
-                  <label for="exampleFormControlSelect2">Example multiple select</label>
-                  <select multiple class="form-control" id="exampleFormControlSelect2">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                </div> --}}
-
                 <button type="submit" class="btn btn-primary">{{__('messages.Send')}}</button>
               </form>
         </div>
