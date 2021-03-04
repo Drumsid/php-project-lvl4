@@ -51,4 +51,5 @@ return [
     'Edit tag' => 'Edit tag',
     'Task edited successfully!' => 'Task edited successfully!',
     'Task deleted successfully!' => 'Task deleted successfully!',
+    'View a task' => 'View a task',
 ];

@@ -29,7 +29,7 @@
                         @foreach($tasks as $task)    
                       <tr>
                         <th>{{ $task->id }}</th>
-                        <td>{{ $task->name }}</td>
+                        <td><a href="{{ route('tasks.show', $task) }}">{{ $task->name }}</a></td>
                         <td>{{ $task->description }}</td>
                         <td>{{ $task->status->name }}</td>
                         <td>{{ $task->created_by->name }}</td>

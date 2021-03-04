@@ -39,7 +39,7 @@
                   <label for="exampleFormControlSelect1">Assigned</label>
                   <select class="form-control" id="exampleFormControlSelect1" name="assigned_to_id">
                     @if($task->assigned_to === null)
-                    <option>---------</option>
+                    <option value="">---------</option>
                     @else
                     <option value="{{$task->assigned_to->id}}">{{$task->assigned_to->name}}</option>
                     @endif
