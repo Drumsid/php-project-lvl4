@@ -49,6 +49,7 @@ class TaskController extends Controller
             'name' => 'required|min:3',
             'status_id' => 'required',
             'created_by_id' => 'required',
+            'description' => 'nullable',
         ]);
         // dd($data);
         $task = new Task();
@@ -78,7 +79,9 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        //
+        $task = Task::find($id);
+        $taskStatuses = TaskStatus::where('id', '!=', $task->status->id)->pluck('name', 'id')->all();
+        return view('tasks.edit', compact('task', 'taskStatuses'));
     }
 
     /**
@@ -90,7 +93,18 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $data = $this->validate($request, [
+            'name' => 'required|min:3',
+            'status_id' => 'required',
+            'created_by_id' => 'required',
+            'description' => 'nullable',
+        ]);
+        $task->fill($data);
+        $task->save();
+        flash(__('messages.Task edited successfully!'))->success();
+        return redirect()
+            ->route('tasks.index');
     }
 
     /**
@@ -101,6 +115,14 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $user = auth()->user()->id;
+        if ($task && $user == $task->created_by_id) {
+            $task->delete();
+            flash(__('messages.Task deleted successfully!'))->success();
+        } else {
+            flash(__('HZ'))->success();
+        }
+        return redirect()->route('tasks.index');
     }
 }

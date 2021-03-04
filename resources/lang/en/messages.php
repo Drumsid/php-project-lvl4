@@ -48,4 +48,7 @@ return [
     'Enter task name' => 'Enter task name',
     'Enter description' => 'Enter description',
     'Task added successfully!' => 'Task added successfully!',
+    'Edit tag' => 'Edit tag',
+    'Task edited successfully!' => 'Task edited successfully!',
+    'Task deleted successfully!' => 'Task deleted successfully!',
 ];
