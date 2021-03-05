@@ -44,4 +44,13 @@ return [
     'User' => 'Пользователь',
     'Assigned' => 'Исполнитель',
     'Status' => 'Статус',
+    'Add new task' => 'Добавить задачу',
+    'Enter task name' => 'Имя задачи',
+    'Enter description' => 'Описание',
+    'Task added successfully!' => 'Задача успешно добавлена!',
+    'Edit Task' => 'Редактировать задачу',
+    'Task edited successfully!' => 'Задача отредактирована!',
+    'Task deleted successfully!' => 'Задача удалена!',
+    'View a task' => 'Посмотреть задачу',
+    'Confirm deletion' => 'Подтвердите удаление',
 ];

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <h2>{{ __('messages.Edit tag') }}</h2>
+            <h2>{{ __('messages.Edit Task') }}</h2>
             @if ($errors->any())
                 <div>
                     <ul>
