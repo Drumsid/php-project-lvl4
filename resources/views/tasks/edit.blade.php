@@ -38,10 +38,10 @@
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Assigned</label>
                   <select class="form-control" id="exampleFormControlSelect1" name="assigned_to_id">
-                    @if($task->assigned_to === null)
+                    @if($task->assignedTo === null)
                     <option value="">---------</option>
                     @else
-                    <option value="{{$task->assigned_to->id}}">{{$task->assigned_to->name}}</option>
+                    <option value="{{$task->assignedTo->id}}">{{$task->assignedTo->name}}</option>
                     @endif
                     @foreach($users as $id => $name)
                         <option value="{{$id}}">{{$name}}</option>

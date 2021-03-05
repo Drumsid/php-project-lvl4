@@ -32,8 +32,8 @@
                         <td><a href="{{ route('tasks.show', $task) }}">{{ $task->name }}</a></td>
                         <td>{{ $task->description }}</td>
                         <td>{{ $task->status->name }}</td>
-                        <td>{{ $task->created_by->name }}</td>
-                        <td>{{ $asigned = $task->assigned_to->name ?? null }}</td>
+                        <td>{{ $task->createdBy->name }}</td>
+                        <td>{{ $asigned = $task->assignedTo->name ?? null }}</td>
                         <td>{{ $task->updated_at }}</td>
                         @auth
                         <td>

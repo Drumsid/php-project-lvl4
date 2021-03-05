@@ -7,10 +7,9 @@ use App\Models\User;
 
 class TestController extends Controller
 {
-    
-    public function test(){
+    public function test()
+    {
         $user = User::findOrFail(6);
         return view('test.index', compact('user'));
     }
-
 }
