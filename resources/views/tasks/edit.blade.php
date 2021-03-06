@@ -29,22 +29,26 @@
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Status</label>
                   <select class="form-control" id="exampleFormControlSelect1" name="status_id">
-                      <option value="{{$task->status->id}}">{{$task->status->name}}</option>
+                      <option value="">---------</option>
                     @foreach($taskStatuses as $id => $name)
-                        <option value="{{$id}}">{{$name}}</option>
+                        <option value="{{$id}}" @if(isset($task->status->id) && $id == $task->status->id) selected @endif>{{$name}}</option>
                     @endforeach
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Assigned</label>
                   <select class="form-control" id="exampleFormControlSelect1" name="assigned_to_id">
-                    @if($task->assignedTo === null)
                     <option value="">---------</option>
-                    @else
-                    <option value="{{$task->assignedTo->id}}">{{$task->assignedTo->name}}</option>
-                    @endif
                     @foreach($users as $id => $name)
-                        <option value="{{$id}}">{{$name}}</option>
+                        <option value="{{$id}}" @if(isset($task->assignedTo->id) && $id == $task->assignedTo->id) selected @endif>{{$name}}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect2">Labels</label>
+                  <select name="labels[]" multiple class="form-control" id="exampleFormControlSelect2">
+                    @foreach($labels as $id => $name)
+                        <option value="{{$id}}" @if(in_array($id, $task->labels->pluck('id')->all())) selected @endif>{{$name}}</option>
                     @endforeach
                   </select>
                 </div>

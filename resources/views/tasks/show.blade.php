@@ -8,6 +8,14 @@
             <p>{{ __('messages.Name') . ": " . $task->name}}</p>
             <p>{{ __('messages.Status') . ": " . $task->status->name}}</p>
             <p>{{ __('messages.Description') . ": " . $task->description ?? null}}</p>
+            @if(count($task->labels) > 0)
+            <p>{{ __('messages.Labels') . ": "}}</p>
+            <ul>
+                @foreach($task->labels as $label)
+                <li>{{$label->name}}</li>
+                @endforeach
+            </ul>
+            @endif
             <a href="{{ route('tasks.edit', ['task' => $task->id]) }}" class="btn btn-info btn-sm float-left mr-1">
                 {{ __('messages.edit') }}
             </a>

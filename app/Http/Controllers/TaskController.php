@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
+use App\Models\Label;
 use Illuminate\Support\Facades\Validator;
 
 class TaskController extends Controller
@@ -30,8 +31,9 @@ class TaskController extends Controller
     {
         $task = new Task();
         $taskStatuses = TaskStatus::pluck('name', 'id')->all();
+        $labels = Label::pluck('name', 'id')->all();
         $users = User::pluck('name', 'id')->all();
-        return view('tasks.create', compact('task', 'taskStatuses', 'users'));
+        return view('tasks.create', compact('task', 'taskStatuses', 'users', 'labels'));
     }
 
     /**
@@ -43,15 +45,18 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $data = $this->validate($request, [
+        $request->validate([
             'name' => 'required|min:3',
             'status_id' => 'required',
             'created_by_id' => 'required',
             'assigned_to_id' => 'nullable',
             'description' => 'nullable',
         ]);
-        $task = new Task();
-        $task->fill($data);
+
+        $data = $request->all();
+        
+        $task = Task::create($data);
+        $task->labels()->sync($request->labels);
         $task->save();
         flash(__('messages.Task added successfully!'))->success();
         return redirect()
@@ -79,12 +84,10 @@ class TaskController extends Controller
     public function edit($id)
     {
         $task = Task::find($id);
-        $taskStatuses = TaskStatus::where('id', '!=', $task->status->id)->pluck('name', 'id')->all();
-        if ($task->assigned_to) {
-            $users = User::where('id', '!=', $task->assigned_to->id)->pluck('name', 'id')->all();
-        }
+        $taskStatuses = TaskStatus::pluck('name', 'id')->all();
+        $labels = Label::pluck('name', 'id')->all();
         $users = User::pluck('name', 'id')->all();
-        return view('tasks.edit', compact('task', 'taskStatuses', 'users'));
+        return view('tasks.edit', compact('task', 'taskStatuses', 'users', 'labels'));
     }
 
     /**
@@ -96,15 +99,18 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $task = Task::findOrFail($id);
-        $data = $this->validate($request, [
+        $request->validate([
             'name' => 'required|min:3',
             'status_id' => 'required',
-            // 'created_by_id' => 'required',
             'description' => 'nullable',
             'assigned_to_id' => 'nullable',
         ]);
-        $task->fill($data);
+
+        $task = Task::findOrFail($id);
+        $data = $request->all();
+
+        $task->update($data);
+        $task->labels()->sync($request->labels);
         $task->save();
         flash(__('messages.Task edited successfully!'))->success();
         return redirect()

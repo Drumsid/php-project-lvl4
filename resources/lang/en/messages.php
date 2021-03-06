@@ -62,4 +62,5 @@ return [
     'Edit label' => 'Edit label',
     'Label edited successfully!' => 'Label edited successfully!',
     'Label deleted successfully!' => 'Label deleted successfully!',
+    'Labels' => 'Labels',
 ];
