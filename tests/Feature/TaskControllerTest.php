@@ -16,8 +16,6 @@ class TaskControllerTest extends TestCase
     {
         parent::setUp();
         User::factory(1)->create();
-        TaskStatus::factory()->count(2)->make();
-        Task::factory()->count(1)->make();
     }
 
     public function testIndex(): void
@@ -46,14 +44,13 @@ class TaskControllerTest extends TestCase
         $this->assertDatabaseHas('tasks', $data);
     }
 
-    // public function testShow()
-    // {
-        // $task = Task::all();
-    //     $task = Task::find(1);
-    //     dd($task);
-    //     $response = $this->get(route('tasks.show', $task->id));
-    //     $response->assertOk();
-    // }
+    public function testShow()
+    {
+        TaskStatus::factory()->create();
+        $task = Task::factory()->create();
+        $response = $this->get(route('tasks.show', $task->id));
+        $response->assertOk();
+    }
 
     // public function testEdit()
     // {

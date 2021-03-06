@@ -7,7 +7,8 @@ use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
 use App\Models\Label;
-use Illuminate\Support\Facades\Validator;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class TaskController extends Controller
 {
@@ -18,8 +19,18 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all();
-        return view('tasks.index', compact('tasks'));
+        // dd($_GET);
+        $taskStatuses = TaskStatus::pluck('name', 'id')->all();
+        $users = User::pluck('name', 'id')->all();
+        // $tasks = Task::all();
+        $tasks = QueryBuilder::for(Task::class)
+                ->allowedFilters([
+                    AllowedFilter::exact('status_id'),
+                    AllowedFilter::exact('created_by_id'),
+                    AllowedFilter::exact('assigned_to_id'),
+                ])
+                ->get();
+        return view('tasks.index', compact('tasks', 'taskStatuses', 'users'));
     }
 
     /**
@@ -54,7 +65,7 @@ class TaskController extends Controller
         ]);
 
         $data = $request->all();
-        
+
         $task = Task::create($data);
         $task->labels()->sync($request->labels);
         $task->save();

@@ -5,9 +5,34 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <h2 class="mb-5">{{ __('messages.Tasks') }}</h2>
-            @auth
-              <a class="btn btn-primary mb-5" href="{{ route('tasks.create') }}" role="button">{{ __('messages.Add task') }}</a>
-            @endauth
+            <div class="d-flex  mb-5 justify-content-between">
+              <form method="GET" action="" class="form-inline">
+                <select class="form-control mr-2" name="filter[status_id]">
+                  <option selected="selected" value="">Статус</option>
+                  @foreach($taskStatuses as $id => $name)
+                  <option value="{{$id}}">{{$name}}</option>
+                  @endforeach
+                </select>
+                <select class="form-control mr-2" name="filter[created_by_id]">
+                    <option selected="selected" value="">Автор</option>
+                    @foreach($users as $id => $name)
+                    <option value="{{$id}}">{{$name}}</option>
+                    @endforeach
+                </select>
+                <select class="form-control mr-2" name="filter[assigned_to_id]">
+                  <option selected="selected" value="">Исполнитель</option>
+                  @foreach($users as $id => $name)
+                  <option value="{{$id}}">{{$name}}</option>
+                  @endforeach
+                </select>
+                  <input class="btn btn-outline-primary mr-2" type="submit" value="Применить">
+              </form>
+              <div>
+                @auth
+                <a class="btn btn-primary" href="{{ route('tasks.create') }}" role="button">{{ __('messages.Add task') }}</a>
+              @endauth
+              </div>
+          </div>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
