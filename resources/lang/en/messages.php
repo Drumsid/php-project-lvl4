@@ -53,4 +53,13 @@ return [
     'Task deleted successfully!' => 'Task deleted successfully!',
     'View a task' => 'View a task',
     'Confirm deletion' => 'Confirm deletion',
+    'Labels' => 'Labels',
+    'Add label' => 'Add label',
+    'No labels yet ...' => 'No labels yet ...',
+    'Add new label' => 'Add new label',
+    'Enter label' => 'Enter label',
+    'Label added successfully!' => 'Label added successfully!',
+    'Edit label' => 'Edit label',
+    'Label edited successfully!' => 'Label edited successfully!',
+    'Label deleted successfully!' => 'Label deleted successfully!',
 ];

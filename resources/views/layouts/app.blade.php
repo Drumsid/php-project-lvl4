@@ -39,6 +39,9 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ route('task_statuses.index') }}">{{ __('messages.Statuses') }}</a>
                         </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('labels.index') }}">{{ __('messages.Labels') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

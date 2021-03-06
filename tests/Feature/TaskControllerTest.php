@@ -46,9 +46,12 @@ class TaskControllerTest extends TestCase
         $this->assertDatabaseHas('tasks', $data);
     }
 
-    // public function testShow(): void
+    // public function testShow()
     // {
-    //     $response = $this->get(route('tasks.show', 1));
+        // $task = Task::all();
+    //     $task = Task::find(1);
+    //     dd($task);
+    //     $response = $this->get(route('tasks.show', $task->id));
     //     $response->assertOk();
     // }
 
