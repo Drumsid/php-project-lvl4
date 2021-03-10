@@ -14,6 +14,7 @@
                       <tr>
                         <th scope="col">ID</th>
                         <th scope="col">{{ __('messages.Name') }}</th>
+                        <th scope="col">{{ __('messages.Description') }}</th>
                         <th scope="col">{{ __('messages.Date of creation') }}</th>
                         @auth
                           <th scope="col">{{ __('messages.Actions') }}</th>
@@ -26,6 +27,7 @@
                       <tr>
                         <th>{{ $label->id }}</th>
                         <td>{{ $label->name }}</td>
+                        <td>{{ $label->description }}</td>
                         <td>{{ $label->updated_at }}</td>
                         @auth
                         <td>

@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">{{ __('messages.Description') }}</label>
                     <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
-                  </div>
+                </div>
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">{{ __('messages.Status') }}</label>
                   <select class="form-control" id="exampleFormControlSelect1" name="status_id">

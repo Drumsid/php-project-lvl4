@@ -39,6 +39,7 @@ class LabelController extends Controller
     {
         $data = $this->validate($request, [
             'name' => 'required|min:3',
+            'description' => 'nullable'
         ]);
 
         $taskStatus = new Label();
@@ -83,7 +84,8 @@ class LabelController extends Controller
     {
         $label = Label::findOrFail($id);
         $data = $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required',
+            'description' => 'nullable',
         ]);
         $label->fill($data);
         $label->save();

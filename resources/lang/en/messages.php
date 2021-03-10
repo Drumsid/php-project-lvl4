@@ -73,4 +73,5 @@ return [
     'No tasks yet ...' => 'No tasks yet ...',
     'Refresh' => 'Refresh',
     'Сreate' => 'Сreate',
+    'Registers' => 'Registers',
 ];
