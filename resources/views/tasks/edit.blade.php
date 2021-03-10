@@ -17,17 +17,16 @@
             <form method="post" action="{{route('tasks.update', $task)}}">
                 @csrf
                 @method('PUT')
-                {{-- <input type="hidden" name="created_by_id" value="{{ auth()->user()->id }}"> --}}
                 <div class="form-group">
-                  <label for="exampleFormControlInput1">Name</label>
+                  <label for="exampleFormControlInput1">{{ __('messages.Name') }}</label>
                   <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="" value="{{$task->name}}">
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Description</label>
+                    <label for="exampleFormControlTextarea1">{{ __('messages.Description') }}</label>
                     <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3">{!! $task->description !!}</textarea>
                   </div>
                 <div class="form-group">
-                  <label for="exampleFormControlSelect1">Status</label>
+                  <label for="exampleFormControlSelect1">{{ __('messages.Status') }}</label>
                   <select class="form-control" id="exampleFormControlSelect1" name="status_id">
                       <option value="">---------</option>
                     @foreach($taskStatuses as $id => $name)
@@ -36,7 +35,7 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="exampleFormControlSelect1">Assigned</label>
+                  <label for="exampleFormControlSelect1">{{ __('messages.Assigned') }}</label>
                   <select class="form-control" id="exampleFormControlSelect1" name="assigned_to_id">
                     <option value="">---------</option>
                     @foreach($users as $id => $name)
@@ -45,14 +44,14 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="exampleFormControlSelect2">Labels</label>
+                  <label for="exampleFormControlSelect2">{{ __('messages.Labels') }}</label>
                   <select name="labels[]" multiple class="form-control" id="exampleFormControlSelect2">
                     @foreach($labels as $id => $name)
                         <option value="{{$id}}" @if(in_array($id, $task->labels->pluck('id')->all())) selected @endif>{{$name}}</option>
                     @endforeach
                   </select>
                 </div>
-                <button type="submit" class="btn btn-primary">{{__('messages.Send')}}</button>
+                <button type="submit" class="btn btn-primary">{{__('messages.Refresh')}}</button>
               </form>
         </div>
     </div>

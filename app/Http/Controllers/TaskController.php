@@ -19,10 +19,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        // dd($_GET);
         $taskStatuses = TaskStatus::pluck('name', 'id')->all();
         $users = User::pluck('name', 'id')->all();
-        // $tasks = Task::all();
         $tasks = QueryBuilder::for(Task::class)
                 ->allowedFilters([
                     AllowedFilter::exact('status_id'),

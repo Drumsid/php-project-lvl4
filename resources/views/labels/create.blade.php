@@ -16,7 +16,7 @@
             @endif
             {{Form::model($label, ['url' => route('labels.store'), 'method' => 'post', 'class' => 'd-flex justify-content-center flex-column flex-md-row'])}}
                 {{Form::text('name', $value = old('name'), ['class' => 'form-control form-control-lg d-block d-md-block mb-3 mb-md-0', 'placeholder' => __('messages.Enter label')])}}
-                {{Form::submit(__('messages.Send'), ['class' => 'btn btn-lg btn-primary ms-md-3 px-5 text-uppercase'])}}
+                {{Form::submit(__('messages.Сreate'), ['class' => 'btn btn-lg btn-primary ms-md-3 px-5 text-uppercase'])}}
             {{Form::close()}}
         </div>
     </div>

@@ -25,8 +25,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/test', [TestController::class, 'test'])->name('test'); //test
-
 Route::resource('task_statuses', TaskStatusController::class);
 Route::resource('tasks', TaskController::class);
 Route::resource('labels', LabelController::class);

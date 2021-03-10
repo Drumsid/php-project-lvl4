@@ -52,32 +52,35 @@ class TaskControllerTest extends TestCase
         $response->assertOk();
     }
 
-    // public function testEdit()
-    // {
-    //     $task = Task::factory()->create();
-    //     $response = $this->get(route('tasks.edit', [$task]));
-    //     $response->assertOk();
-    // }
+    public function testEdit()
+    {
+        $task = Task::factory()->create();
+        $response = $this->get(route('tasks.edit', [$task]));
+        $response->assertOk();
+    }
 
-    // public function testUpdate()
-    // {
-    //     $task = Task::factory()->create();
-    //     $factoryData = Task::factory()->make()->toArray();
-    //     $data = Arr::only($factoryData, ['name', 'status_id', 'created_by_id', 'assigned_to_id', 'description']);
-    //     $response = $this->patch(route('tasks.update', $task), $data);
-    //     $response->assertSessionHasNoErrors();
-    //     $response->assertRedirect();
+    public function testUpdate()
+    {
+        $task = Task::factory()->create();
+        $factoryData = Task::factory()->make()->toArray();
+        $data = Arr::only($factoryData, ['name', 'status_id', 'created_by_id', 'assigned_to_id', 'description']);
+        $response = $this->patch(route('tasks.update', $task), $data);
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect();
 
-    //     $this->assertDatabaseHas('tasks', $data);
-    // }
+        $this->assertDatabaseHas('tasks', $data);
+    }
 
-    // public function testDestroy()
-    // {
-    //     $task = Task::factory()->create();
-    //     $response = $this->delete(route('tasks.destroy', [$task]));
-    //     $response->assertSessionHasNoErrors();
-    //     $response->assertRedirect();
+    public function testDestroy()
+    {
+        $task = Task::factory()->create();
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+                    ->withSession(['banned' => false])
+                    ->delete(route('tasks.destroy', [$task]));
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect();
 
-    //     $this->assertDatabaseMissing('task_statuses', ['id' => $task->id]);
-    // }
+        $this->assertDatabaseMissing('tasks', ['id' => $task->id]);
+    }
 }

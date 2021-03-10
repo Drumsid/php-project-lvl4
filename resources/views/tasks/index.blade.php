@@ -8,24 +8,24 @@
             <div class="d-flex  mb-5 justify-content-between">
               <form method="GET" action="" class="form-inline">
                 <select class="form-control mr-2" name="filter[status_id]">
-                  <option selected="selected" value="">Статус</option>
+                  <option selected="selected" value="">{{ __('messages.Status') }}</option>
                   @foreach($taskStatuses as $id => $name)
                   <option value="{{$id}}">{{$name}}</option>
                   @endforeach
                 </select>
                 <select class="form-control mr-2" name="filter[created_by_id]">
-                    <option selected="selected" value="">Автор</option>
+                    <option selected="selected" value="">{{ __('messages.Author') }}</option>
                     @foreach($users as $id => $name)
                     <option value="{{$id}}">{{$name}}</option>
                     @endforeach
                 </select>
                 <select class="form-control mr-2" name="filter[assigned_to_id]">
-                  <option selected="selected" value="">Исполнитель</option>
+                  <option selected="selected" value="">{{ __('messages.Executor') }}</option>
                   @foreach($users as $id => $name)
                   <option value="{{$id}}">{{$name}}</option>
                   @endforeach
                 </select>
-                  <input class="btn btn-outline-primary mr-2" type="submit" value="Применить">
+                  <input class="btn btn-outline-primary mr-2" type="submit" value="{{ __('messages.Apply') }}">
               </form>
               <div>
                 @auth
@@ -38,10 +38,9 @@
                     <thead>
                       <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">{{ __('messages.Name') }}</th>
-                        <th scope="col">{{ __('messages.Description') }}</th>
                         <th scope="col">{{ __('messages.Status') }}</th>
-                        <th scope="col">{{ __('messages.User') }}</th>
+                        <th scope="col">{{ __('messages.Name') }}</th>
+                        <th scope="col">{{ __('messages.Author') }}</th>
                         <th scope="col">{{ __('messages.Assigned') }}</th>
                         <th scope="col">{{ __('messages.Date of creation') }}</th>
                         @auth
@@ -54,9 +53,8 @@
                         @foreach($tasks as $task)    
                       <tr>
                         <th>{{ $task->id }}</th>
-                        <td><a href="{{ route('tasks.show', $task) }}">{{ $task->name }}</a></td>
-                        <td>{{ $task->description }}</td>
                         <td>{{ $task->status->name }}</td>
+                        <td><a href="{{ route('tasks.show', $task) }}">{{ $task->name }}</a></td>
                         <td>{{ $task->createdBy->name }}</td>
                         <td>{{ $asigned = $task->assignedTo->name ?? null }}</td>
                         <td>{{ $task->updated_at }}</td>
@@ -80,7 +78,7 @@
                       </tr>
                       @endforeach
                     @else
-                    <th>{{ __('messages.No statuses yet ...') }}</th>
+                    <th>{{ __('messages.No tasks yet ...') }}</th>
                     @endif
                     </tbody>
                   </table>

@@ -24,7 +24,7 @@ class TaskFactory extends Factory
         return [
             'name' => $this->faker->name,
             'status_id' => 1,
-            'created_by_id' => rand(1, 2)
+            'created_by_id' => 1
         ];
     }
 }

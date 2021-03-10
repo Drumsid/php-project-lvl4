@@ -14,7 +14,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \App\Models\User::factory(4)->create();
-        // \App\Models\Label::factory(4)->create();
         $this->call(TaskStatusTableSeeder::class);
         $this->call(LabelSeeder::class);
     }
