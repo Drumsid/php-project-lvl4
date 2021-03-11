@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <h2 class="mb-5">{{ __('messages.Tasks') }}</h2>
             <div class="d-flex  mb-5 justify-content-between">
-              <form method="GET" action="" class="form-inline">
+              {{-- <form method="GET" action="" class="form-inline">
                 <select class="form-control mr-2" name="filter[status_id]">
                   <option selected="selected" value="">{{ __('messages.Status') }}</option>
                   @foreach($taskStatuses as $id => $name)
@@ -26,7 +26,13 @@
                   @endforeach
                 </select>
                   <input class="btn btn-outline-primary mr-2" type="submit" value="{{ __('messages.Apply') }}">
-              </form>
+              </form> --}}
+              {{Form::open([ 'method' => 'GET', 'class' => 'form-inline'])}}
+                {{Form::select('filter[status_id]', ['' => __('messages.Status')] + $taskStatuses, null, ['class' => 'form-control mr-2'])}}
+                {{Form::select('filter[created_by_id]', ['' => __('messages.Author')] + $users, null, ['class' => 'form-control mr-2'])}}
+                {{Form::select('filter[assigned_to_id]', ['' => __('messages.Executor')] + $users, null, ['class' => 'form-control mr-2'])}}
+                {{Form::submit(__('messages.Apply'), ['class' => 'btn btn-outline-primary mr-2'])}}
+              {{Form::close()}}
               <div>
                 @auth
                 <a class="btn btn-primary" href="{{ route('tasks.create') }}" role="button">{{ __('messages.Add task') }}</a>
