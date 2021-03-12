@@ -19,7 +19,7 @@
                 {{Form::submit(__('messages.Сreate'), ['class' => 'btn btn-lg btn-primary ms-md-3 px-5 text-uppercase'])}}
             {{Form::close()}} --}}
 
-            <form method="post" action="{{route('labels.store')}}">
+            {{-- <form method="post" action="{{route('labels.store')}}">
                 @csrf
                 <div class="form-group">
                     <label for="exampleFormControlInput1">{{ __('messages.Name') }}</label>
@@ -30,7 +30,18 @@
                     <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">{{__('messages.Сreate')}}</button>
-            </form>
+            </form> --}}
+            {{Form::model($label, ['url' => route('labels.store'), 'method' => 'post'])}}
+                <div class="form-group">
+                  {{ Form::label(__('messages.Name'), null, ['class' => 'control-label']) }}
+                  {{ Form::text('name', $value = old('name'), ['class' => 'form-control']) }}
+                </div>
+                <div class="form-group">
+                  {{ Form::label(__('messages.Description'), null, ['class' => 'control-label']) }}
+                  {{Form::textarea('description', $value = old('name'), ['class' => 'form-control'])}}
+                </div>
+                {{Form::submit(__('messages.Сreate'), ['class' => 'btn btn-primary'])}}
+            {{Form::close()}}
         </div>
     </div>
 </div>

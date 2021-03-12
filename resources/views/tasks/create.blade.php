@@ -14,7 +14,7 @@
                     </ul>
                 </div>
             @endif
-            <form method="post" action="{{route('tasks.store')}}">
+            {{-- <form method="post" action="{{route('tasks.store')}}">
                 @csrf
                 <input type="hidden" name="created_by_id" value="{{ auth()->user()->id }}">
                 <div class="form-group">
@@ -51,7 +51,31 @@
                   </select>
                 </div>
                 <button type="submit" class="btn btn-primary">{{__('messages.Сreate')}}</button>
-              </form>
+              </form> --}}
+            {{Form::model($task, ['url' => route('tasks.store'), 'method' => 'post'])}}
+                {{Form::hidden('created_by_id', $value = auth()->user()->id)}}
+                <div class="form-group">
+                  {{ Form::label(__('messages.Name'), null, ['class' => 'control-label']) }}
+                  {{Form::text('name', $value = old('name'), ['class' => 'form-control'])}}
+                </div>
+                <div class="form-group">
+                  {{ Form::label(__('messages.Description'), null, ['class' => 'control-label']) }}
+                  {{Form::textarea('description', $value = old('name'), ['class' => 'form-control'])}}
+                </div>
+                <div class="form-group">
+                  {{ Form::label(__('messages.Status'), null, ['class' => 'control-label']) }}
+                  {{Form::select('status_id', $taskStatuses, null, ['class' => 'form-control'])}}
+                </div>
+                <div class="form-group">
+                  {{ Form::label(__('messages.Assigned'), null, ['class' => 'control-label']) }}
+                  {{Form::select('assigned_to_id', ['' => '---------'] + $users, null, ['class' => 'form-control'])}}
+                </div>
+                <div class="form-group">
+                  {{ Form::label(__('messages.Labels'), null, ['class' => 'control-label']) }}
+                  {{Form::select('labels[]', $labels, null, ['class' => 'form-control', 'multiple'])}}
+                </div>
+                {{Form::submit(__('messages.Сreate'), ['class' => 'btn btn-primary'])}}
+            {{Form::close()}}
         </div>
     </div>
 </div>
