@@ -14,46 +14,30 @@
                     </ul>
                 </div>
             @endif
-            <form method="post" action="{{route('tasks.update', $task)}}">
-                @csrf
-                @method('PUT')
+            {{Form::model($task, ['url' => route('tasks.update', $task), 'method' => 'PUT'])}}
                 <div class="form-group">
-                  <label for="exampleFormControlInput1">{{ __('messages.Name') }}</label>
-                  <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="" value="{{$task->name}}">
+                  {{ Form::label(__('messages.Name'), null, ['class' => 'control-label']) }}
+                  {{Form::text('name', $value = old('name'), ['class' => 'form-control'])}}
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">{{ __('messages.Description') }}</label>
-                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3">{!! $task->description !!}</textarea>
-                  </div>
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">{{ __('messages.Status') }}</label>
-                  <select class="form-control" id="exampleFormControlSelect1" name="status_id">
-                      <option value="">---------</option>
-                    @foreach($taskStatuses as $id => $name)
-                        <option value="{{$id}}" @if(isset($task->status->id) && $id == $task->status->id) selected @endif>{{$name}}</option>
-                    @endforeach
-                  </select>
+                  {{ Form::label(__('messages.Description'), null, ['class' => 'control-label']) }}
+                  {{Form::textarea('description', $value = old('name'), ['class' => 'form-control'])}}
                 </div>
                 <div class="form-group">
-                  <label for="exampleFormControlSelect1">{{ __('messages.Assigned') }}</label>
-                  <select class="form-control" id="exampleFormControlSelect1" name="assigned_to_id">
-                    <option value="">---------</option>
-                    @foreach($users as $id => $name)
-                        <option value="{{$id}}" @if(isset($task->assignedTo->id) && $id == $task->assignedTo->id) selected @endif>{{$name}}</option>
-                    @endforeach
-                  </select>
+                  {{ Form::label(__('messages.Status'), null, ['class' => 'control-label']) }}
+                  {{Form::select('status_id', $taskStatuses, $taskStatusesSelected, ['class' => 'form-control'])}}
                 </div>
                 <div class="form-group">
-                  <label for="exampleFormControlSelect2">{{ __('messages.Labels') }}</label>
-                  <select name="labels[]" multiple class="form-control" id="exampleFormControlSelect2">
-                    @foreach($labels as $id => $name)
-                        <option value="{{$id}}" @if(in_array($id, $task->labels->pluck('id')->all())) selected @endif>{{$name}}</option>
-                    @endforeach
-                  </select>
+                  {{ Form::label(__('messages.Assigned'), null, ['class' => 'control-label']) }}
+                  {{Form::select('assigned_to_id', ['' => '---------'] + $users, $userSelected, ['class' => 'form-control'])}}
                 </div>
-                <button type="submit" class="btn btn-primary">{{__('messages.Refresh')}}</button>
-              </form>
-        </div>
+                <div class="form-group">
+                  {{ Form::label(__('messages.Labels'), null, ['class' => 'control-label']) }}
+                  {{Form::select('labels[]', $labels, $labelsSelected, ['class' => 'form-control', 'multiple'])}}
+                </div>
+                {{Form::submit(__('messages.Refresh'), ['class' => 'btn btn-primary'])}}
+            {{Form::close()}}
+            </div>
     </div>
 </div>
 @endsection

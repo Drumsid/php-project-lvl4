@@ -94,9 +94,18 @@ class TaskController extends Controller
     {
         $task = Task::find($id);
         $taskStatuses = TaskStatus::pluck('name', 'id')->all();
+        $taskStatusesSelected = [];
+        if (isset($task->status->id)) {
+            $taskStatusesSelected[] = $task->status->id;
+        }
+        $userSelected = [];
+        if (isset($task->assignedTo->id)) {
+            $userSelected[] = $task->assignedTo->id;
+        }
         $labels = Label::pluck('name', 'id')->all();
         $users = User::pluck('name', 'id')->all();
-        return view('tasks.edit', compact('task', 'taskStatuses', 'users', 'labels'));
+        $labelsSelected = $this->findSelectedLabels($labels, $task);
+        return view('tasks.edit', compact('task', 'taskStatuses', 'users', 'labels', 'taskStatusesSelected', 'userSelected', 'labelsSelected'));
     }
 
     /**
@@ -143,5 +152,16 @@ class TaskController extends Controller
             flash(__('HZ'))->success();
         }
         return redirect()->route('tasks.index');
+    }
+
+    public function findSelectedLabels($arr, $task)
+    {
+        $res = [];
+        foreach ($arr as $id => $name) {
+            if (in_array($id, $task->labels->pluck('id')->all())) {
+                $res[] = $id;
+            }
+        }
+        return $res;
     }
 }

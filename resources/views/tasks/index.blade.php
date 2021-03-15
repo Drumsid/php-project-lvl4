@@ -6,27 +6,6 @@
         <div class="col-md-12">
             <h2 class="mb-5">{{ __('messages.Tasks') }}</h2>
             <div class="d-flex  mb-5 justify-content-between">
-              {{-- <form method="GET" action="" class="form-inline">
-                <select class="form-control mr-2" name="filter[status_id]">
-                  <option selected="selected" value="">{{ __('messages.Status') }}</option>
-                  @foreach($taskStatuses as $id => $name)
-                  <option value="{{$id}}">{{$name}}</option>
-                  @endforeach
-                </select>
-                <select class="form-control mr-2" name="filter[created_by_id]">
-                    <option selected="selected" value="">{{ __('messages.Author') }}</option>
-                    @foreach($users as $id => $name)
-                    <option value="{{$id}}">{{$name}}</option>
-                    @endforeach
-                </select>
-                <select class="form-control mr-2" name="filter[assigned_to_id]">
-                  <option selected="selected" value="">{{ __('messages.Executor') }}</option>
-                  @foreach($users as $id => $name)
-                  <option value="{{$id}}">{{$name}}</option>
-                  @endforeach
-                </select>
-                  <input class="btn btn-outline-primary mr-2" type="submit" value="{{ __('messages.Apply') }}">
-              </form> --}}
               {{Form::open([ 'method' => 'GET', 'class' => 'form-inline'])}}
                 {{Form::select('filter[status_id]', ['' => __('messages.Status')] + $taskStatuses, null, ['class' => 'form-control mr-2'])}}
                 {{Form::select('filter[created_by_id]', ['' => __('messages.Author')] + $users, null, ['class' => 'form-control mr-2'])}}

@@ -14,23 +14,6 @@
                     </ul>
                 </div>
             @endif
-            {{-- {{Form::model($label, ['url' => route('labels.update', $label), 'method' => 'PATCH', 'class' => 'd-flex justify-content-center flex-column flex-md-row'])}}
-                {{Form::text('name', $value = old('name'), ['class' => 'form-control form-control-lg d-block d-md-block mb-3 mb-md-0', 'placeholder' => 'Введите статус'])}}
-                {{Form::submit(__('messages.Refresh'), ['class' => 'btn btn-lg btn-primary ms-md-3 px-5 text-uppercase'])}}
-            {{Form::close()}} --}}
-            {{-- <form method="post" action="{{route('labels.update', $label)}}">
-                @csrf
-                @method('PUT')
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">{{ __('messages.Name') }}</label>
-                    <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="" value="{{$label->name}}">
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">{{ __('messages.Description') }}</label>
-                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3">{{$label->description}}</textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">{{__('messages.Refresh')}}</button>
-            </form> --}}
             {{Form::model($label, ['url' => route('labels.update', $label), 'method' => 'PUT'])}}
                 <div class="form-group">
                   {{ Form::label(__('messages.Name'), null, ['class' => 'control-label']) }}
