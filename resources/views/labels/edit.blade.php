@@ -23,7 +23,7 @@
                   {{ Form::label(__('messages.Description'), null, ['class' => 'control-label']) }}
                   {{Form::textarea('description', $value = old('name'), ['class' => 'form-control'])}}
                 </div>
-                {{Form::submit(__('messages.Сreate'), ['class' => 'btn btn-primary'])}}
+                {{Form::submit(__('messages.Refresh'), ['class' => 'btn btn-primary'])}}
             {{Form::close()}}
         </div>
     </div>

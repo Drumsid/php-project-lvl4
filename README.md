@@ -7,3 +7,20 @@
 ### View project
 [Web link to Heroku](https://drumsid-php-project-lvl4.herokuapp.com/ "View project on Heroku")
 
+### Requirements
+
+  * PHP ^7.3.0
+  * Composer
+  * Node.js & npm
+
+### Setup
+
+```sh
+$ make setup
+```
+
+### Run
+
+```sh
+$ make start
+```
