@@ -74,4 +74,5 @@ return [
     'Refresh' => 'Обновить',
     'Сreate' => 'Создать',
     'Registers' => 'Зарегистрировать',
+    'Action is not possible!' => 'Действие не возможно!',
 ];

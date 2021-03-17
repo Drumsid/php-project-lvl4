@@ -101,6 +101,11 @@ class TaskStatusController extends Controller
     public function destroy($id)
     {
         $taskStatus = TaskStatus::find($id);
+        $tasks = $taskStatus->task->all();
+        if (count($tasks) > 0) {
+            flash(__('messages.Action is not possible!'))->success();
+            return redirect()->route('task_statuses.index');
+        }
         if ($taskStatus) {
             $taskStatus->delete();
             flash(__('messages.Status deleted successfully!'))->success();

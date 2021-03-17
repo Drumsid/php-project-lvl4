@@ -103,6 +103,11 @@ class LabelController extends Controller
     public function destroy($id)
     {
         $label = Label::find($id);
+        $tasks = $label->tasks->all();
+        if (count($tasks) > 0) {
+            flash(__('messages.Action is not possible!'))->success();
+            return redirect()->route('labels.index');
+        }
         if ($label) {
             $label->delete();
             flash(__('messages.Label deleted successfully!'))->success();

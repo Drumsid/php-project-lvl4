@@ -25,8 +25,6 @@
                 </div>
                 {{Form::submit(__('messages.Сreate'), ['class' => 'btn btn-primary'])}}
             {{Form::close()}}
-
-            {{Form::select('labels[]', ['1' => 1, '2' => 2, '3' => 3], ['1', '3'], ['class' => 'form-control', 'multiple'])}}
         </div>
     </div>
 </div>
