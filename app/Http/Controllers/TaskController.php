@@ -158,7 +158,7 @@ class TaskController extends Controller
     {
         $collection = collect($labels);
 
-        $filtered = $collection->filter(function ($name, $id) use($task){
+        $filtered = $collection->filter(function ($name, $id) use ($task) {
             if (in_array($id, $task->labels->pluck('id')->all())) {
                 return $id;
             }
