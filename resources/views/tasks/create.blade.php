@@ -24,6 +24,12 @@
                   {{ Form::label(__('messages.Description'), null, ['class' => 'control-label']) }}
                   {{Form::textarea('description', $value = old('name'), ['class' => 'form-control'])}}
                 </div>
+                {{-- {{ Form::bsText(__('messages.Name')) }}
+                {{ Form::bsTextarea(__('messages.Description')) }}
+                {{ Form::bsSelect(__('messages.Status'), $taskStatuses) }}
+                {{ Form::bsSelect(__('messages.Assigned'), ['' => '---------'] + $users) }} --}}
+                {{-- {{ Form::bsSelect(__('messages.Labels'), $labels, ['multiple']) }} --}}
+
                 <div class="form-group">
                   {{ Form::label(__('messages.Status'), null, ['class' => 'control-label']) }}
                   {{Form::select('status_id', $taskStatuses, null, ['class' => 'form-control'])}}

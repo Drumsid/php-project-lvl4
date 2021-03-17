@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-use Collective\Html;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Schema::defaultStringLength(191);
-        // Form::component('bsText', 'components.form.text', ['name', 'value', 'attributes']);
+        \Form::component('bsText', 'components.form.text', ['name', 'value', 'attributes']);
+        \Form::component('bsTextarea', 'components.form.textarea', ['name', 'value', 'attributes']);
+        \Form::component('bsSelect', 'components.form.select', ['name', 'values', 'value' => null, 'options' => []]);
     }
 }

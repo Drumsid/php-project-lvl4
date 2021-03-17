@@ -15,14 +15,8 @@
                 </div>
             @endif
             {{Form::model($label, ['url' => route('labels.update', $label), 'method' => 'PUT'])}}
-                <div class="form-group">
-                  {{ Form::label(__('messages.Name'), null, ['class' => 'control-label']) }}
-                  {{ Form::text('name', $value = old('name'), ['class' => 'form-control']) }}
-                </div>
-                <div class="form-group">
-                  {{ Form::label(__('messages.Description'), null, ['class' => 'control-label']) }}
-                  {{Form::textarea('description', $value = old('name'), ['class' => 'form-control'])}}
-                </div>
+                {{ Form::bsText(__('messages.Name')) }}
+                {{ Form::bsTextarea(__('messages.Description')) }}
                 {{Form::submit(__('messages.Refresh'), ['class' => 'btn btn-primary'])}}
             {{Form::close()}}
         </div>
