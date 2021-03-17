@@ -154,14 +154,15 @@ class TaskController extends Controller
         return redirect()->route('tasks.index');
     }
 
-    public function findSelectedLabels($arr, $task)
+    public function findSelectedLabels($labels, $task)
     {
-        $res = [];
-        foreach ($arr as $id => $name) {
+        $collection = collect($labels);
+
+        $filtered = $collection->filter(function ($name, $id) use($task){
             if (in_array($id, $task->labels->pluck('id')->all())) {
-                $res[] = $id;
+                return $id;
             }
-        }
-        return $res;
+        });
+        return $filtered->keys()->all();
     }
 }
