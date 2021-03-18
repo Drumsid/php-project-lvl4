@@ -27,6 +27,6 @@ class AppServiceProvider extends ServiceProvider
         // Schema::defaultStringLength(191);
         \Form::component('bsText', 'components.form.text', ['name', 'value', 'attributes']);
         \Form::component('bsTextarea', 'components.form.textarea', ['name', 'value', 'attributes']);
-        \Form::component('bsSelect', 'components.form.select', ['name', 'values', 'value' => null, 'options' => []]);
+        \Form::component('bsSelect', 'components.form.select', ['name', 'label', 'list' => [], 'selected' => null, 'attributes' => []]);
     }
 }

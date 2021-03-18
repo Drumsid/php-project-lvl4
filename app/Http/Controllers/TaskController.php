@@ -144,16 +144,16 @@ class TaskController extends Controller
     public function destroy($id)
     {
         $task = Task::findOrFail($id);
-        $user = auth()->user()->id;
-        if ($task && $user == $task->created_by_id) {
+        // $user = auth()->user()->id;
+        // if ($task && $user == $task->created_by_id) {
             $task->delete();
             flash(__('messages.Task deleted successfully!'))->success();
-        } else {
-            flash(__('HZ'))->success();
-        }
+        // } else {
+        //     flash(__('HZ'))->success();
+        // }
         return redirect()->route('tasks.index');
     }
-
+    // return $user->id === $task->created_by_id;
     public function findSelectedLabels($labels, $task)
     {
         $collection = collect($labels);

@@ -15,26 +15,11 @@
                 </div>
             @endif
             {{Form::model($task, ['url' => route('tasks.update', $task), 'method' => 'PUT'])}}
-                <div class="form-group">
-                  {{ Form::label(__('messages.Name'), null, ['class' => 'control-label']) }}
-                  {{Form::text('name', $value = old('name'), ['class' => 'form-control'])}}
-                </div>
-                <div class="form-group">
-                  {{ Form::label(__('messages.Description'), null, ['class' => 'control-label']) }}
-                  {{Form::textarea('description', $value = old('name'), ['class' => 'form-control'])}}
-                </div>
-                <div class="form-group">
-                  {{ Form::label(__('messages.Status'), null, ['class' => 'control-label']) }}
-                  {{Form::select('status_id', $taskStatuses, $taskStatusesSelected, ['class' => 'form-control'])}}
-                </div>
-                <div class="form-group">
-                  {{ Form::label(__('messages.Assigned'), null, ['class' => 'control-label']) }}
-                  {{Form::select('assigned_to_id', ['' => '---------'] + $users, $userSelected, ['class' => 'form-control'])}}
-                </div>
-                <div class="form-group">
-                  {{ Form::label(__('messages.Labels'), null, ['class' => 'control-label']) }}
-                  {{Form::select('labels[]', $labels, $labelsSelected, ['class' => 'form-control', 'multiple'])}}
-                </div>
+                {{ Form::bsText(__('messages.Name')) }}
+                {{ Form::bsTextarea(__('messages.Description')) }}
+                {{ Form::bsSelect('status_id', __('messages.Status'),  $taskStatuses, $taskStatusesSelected) }}
+                {{ Form::bsSelect('assigned_to_id', __('messages.Assigned'), ['' => '---------'] + $users, $userSelected) }}
+                {{ Form::bsSelect('labels[]', __('messages.Labels'), $labels, $labelsSelected, [ 'multiple' => 'multiple']) }}
                 {{Form::submit(__('messages.Refresh'), ['class' => 'btn btn-primary'])}}
             {{Form::close()}}
             </div>
