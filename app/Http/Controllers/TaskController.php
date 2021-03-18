@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Label;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
+use App\Policies\TaskPolicy;
 
 class TaskController extends Controller
 {
@@ -144,16 +145,16 @@ class TaskController extends Controller
     public function destroy($id)
     {
         $task = Task::findOrFail($id);
-        // $user = auth()->user()->id;
-        // if ($task && $user == $task->created_by_id) {
+        $user = auth()->user();
+        $taskPolicy = new TaskPolicy();
+        if ($taskPolicy->delete($user, $task)) {
             $task->delete();
             flash(__('messages.Task deleted successfully!'))->success();
-        // } else {
-        //     flash(__('HZ'))->success();
-        // }
+        } else {
+            flash(__('messages.Action is not possible!'))->success();
+        }
         return redirect()->route('tasks.index');
     }
-    // return $user->id === $task->created_by_id;
     public function findSelectedLabels($labels, $task)
     {
         $collection = collect($labels);

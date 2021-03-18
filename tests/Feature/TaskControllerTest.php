@@ -74,7 +74,9 @@ class TaskControllerTest extends TestCase
     public function testDestroy()
     {
         $task = Task::factory()->create();
+        // print_r($task);
         $user = User::find(1);
+        // print_r($user);
         $response = $this->actingAs($user)
                     ->withSession(['banned' => false])
                     ->delete(route('tasks.destroy', [$task]));
