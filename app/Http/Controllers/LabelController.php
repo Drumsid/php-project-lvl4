@@ -14,7 +14,7 @@ class LabelController extends Controller
      */
     public function index()
     {
-        $labels = Label::all();
+        $labels = Label::paginate(20);
         return view('labels.index', compact('labels'));
     }
 
@@ -38,7 +38,7 @@ class LabelController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'name' => 'required|min:3',
+            'name' => 'required|min:3|unique:labels,name',
             'description' => 'nullable'
         ]);
 
@@ -48,17 +48,6 @@ class LabelController extends Controller
         flash(__('messages.Label added successfully!'))->success();
         return redirect()
             ->route('labels.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -84,7 +73,7 @@ class LabelController extends Controller
     {
         $label = Label::findOrFail($id);
         $data = $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:labels,name',
             'description' => 'nullable',
         ]);
         $label->fill($data);

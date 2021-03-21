@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TaskStatus;
+use Illuminate\Support\Arr;
 
 class TaskStatusController extends Controller
 {
@@ -14,7 +15,7 @@ class TaskStatusController extends Controller
      */
     public function index()
     {
-        $taskStatuses = TaskStatus::all();
+        $taskStatuses = TaskStatus::paginate(20);
         return view('taskStatus.index', compact('taskStatuses'));
     }
 
@@ -38,7 +39,7 @@ class TaskStatusController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'name' => 'required|min:3',
+            'name' => 'required|min:3|unique:task_statuses,name',
         ]);
 
         $taskStatus = new TaskStatus();
@@ -47,17 +48,6 @@ class TaskStatusController extends Controller
         flash(__('messages.Status added successfully!'))->success();
         return redirect()
             ->route('task_statuses.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -83,7 +73,7 @@ class TaskStatusController extends Controller
     {
         $taskStatus = TaskStatus::findOrFail($id);
         $data = $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required|unique:task_statuses,name'
         ]);
         $taskStatus->fill($data);
         $taskStatus->save();
@@ -102,7 +92,9 @@ class TaskStatusController extends Controller
     {
         $taskStatus = TaskStatus::find($id);
         $tasks = $taskStatus->task->all();
+        // dd($tasks);
         if (count($tasks) > 0) {
+        // if (Arr::exists($tasks, 'name')) {
             flash(__('messages.Action is not possible!'))->success();
             return redirect()->route('task_statuses.index');
         }

@@ -50,6 +50,7 @@
                     </tbody>
                   </table>
               </div>
+              {{ $taskStatuses->links() }}
         </div>
     </div>
 </div>

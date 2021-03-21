@@ -14,9 +14,9 @@
                     </ul>
                 </div>
             @endif
-            {{Form::model($taskStatus, ['url' => route('task_statuses.store'), 'method' => 'post', 'class' => 'd-flex justify-content-center flex-column flex-md-row'])}}
-                {{Form::text('name', $value = old('name'), ['class' => 'form-control form-control-lg d-block d-md-block mb-3 mb-md-0', 'placeholder' => __('messages.Enter status')])}}
-                {{Form::submit(__('messages.Сreate'), ['class' => 'btn btn-lg btn-primary ms-md-3 px-5 text-uppercase'])}}
+            {{Form::model($taskStatus, ['url' => route('task_statuses.store'), 'method' => 'post'])}}
+            {{ Form::bsText(__('messages.Name')) }}
+                {{Form::submit(__('messages.Сreate'), ['class' => 'btn btn-primary'])}}
             {{Form::close()}}
         </div>
     </div>
