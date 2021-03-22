@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
 use Illuminate\Http\Request;
+use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
 use App\Models\Label;
@@ -11,7 +11,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 use App\Policies\TaskPolicy;
 
-class TaskController extends Controller
+class TaskController1 extends Controller
 {
     /**
      * Create the controller instance.
@@ -20,7 +20,7 @@ class TaskController extends Controller
      */
     // public function __construct()
     // {
-    //     $this->authorizeResource(Task::class, 'edit');
+    //     $this->authorizeResource(Task::class, 'post');
     // }
     /**
      * Display a listing of the resource.
@@ -84,24 +84,24 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Task  $task
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Task $task)
+    public function show($id)
     {
-        $task = Task::findOrFail($task->id);
+        $task = Task::findOrFail($id);
         return view('tasks.show', compact('task'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Task  $task
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Task $task)
+    public function edit($id)
     {
-        $task = Task::find($task->id);
+        $task = Task::find($id);
         $taskStatuses = TaskStatus::pluck('name', 'id')->all();
         $taskStatusesSelected = [];
         if (isset($task->status->id)) {
@@ -121,10 +121,10 @@ class TaskController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Task  $task
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required|min:3',
@@ -133,7 +133,7 @@ class TaskController extends Controller
             'assigned_to_id' => 'nullable',
         ]);
 
-        $task = Task::findOrFail($task->id);
+        $task = Task::findOrFail($id);
         $data = $request->all();
 
         $task->update($data);
@@ -147,12 +147,12 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Task  $task
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy($id)
     {
-        $task = Task::findOrFail($task->id);
+        $task = Task::findOrFail($id);
         $user = auth()->user();
         $taskPolicy = new TaskPolicy();
         if ($taskPolicy->delete($user, $task)) {
@@ -163,7 +163,6 @@ class TaskController extends Controller
         }
         return redirect()->route('tasks.index');
     }
-
     public function findSelectedLabels($labels, $task)
     {
         $collection = collect($labels);
