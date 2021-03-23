@@ -45,10 +45,13 @@
                         <td>{{ $task->updated_at }}</td>
                         @auth
                         <td>
+                          {{-- @can('update', $task) --}}
                             <a href="{{ route('tasks.edit', ['task' => $task->id]) }}" class="btn btn-info btn-sm float-left mr-1">
                                 {{ __('messages.edit') }}
                             </a>
-                        @if(auth()->user()->id == $task->created_by_id)
+                          {{-- @endcan --}}
+                        {{-- @if(auth()->user()->id == $task->created_by_id) --}}
+                        @can('delete', $task)
                             <form action="{{ route('tasks.destroy', ['task' => $task->id]) }}" method="post" class="float-left">
                                 @csrf
                                 @method('DELETE')
@@ -57,7 +60,8 @@
                                     {{ __('messages.delete') }}
                                 </button>
                             </form>
-                        @endif
+                        {{-- @endif --}}
+                        @endcan
                         </td>
                         @endauth
                       </tr>

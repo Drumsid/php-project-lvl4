@@ -16,9 +16,9 @@ class TaskPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user)
+    public function viewAny(?User $user)
     {
-        //
+        // return true;
     }
 
     /**
@@ -28,9 +28,9 @@ class TaskPolicy
      * @param  \App\Models\Task  $task
      * @return mixed
      */
-    public function view(User $user, Task $task)
+    public function view(?User $user, Task $task)
     {
-        //
+        // return true;
     }
 
     /**
@@ -39,9 +39,9 @@ class TaskPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(?User $user)
     {
-        //
+        // return true;
     }
 
     /**
@@ -53,7 +53,8 @@ class TaskPolicy
      */
     public function update(User $user, Task $task)
     {
-        //
+        // return auth()->user() ? true : false;
+        // return (bool) $user;
     }
 
     /**
@@ -65,7 +66,8 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task)
     {
-        return $user->id === $task->created_by_id;
+        // return $user->id === $task->created_by_id;
+        return $task->createdBy->is($user);
     }
 
     /**
@@ -77,7 +79,7 @@ class TaskPolicy
      */
     public function restore(User $user, Task $task)
     {
-        //
+        // return false;
     }
 
     /**
@@ -89,6 +91,6 @@ class TaskPolicy
      */
     public function forceDelete(User $user, Task $task)
     {
-        //
+        // return false;
     }
 }

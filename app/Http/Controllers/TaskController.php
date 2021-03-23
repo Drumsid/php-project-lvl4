@@ -20,7 +20,8 @@ class TaskController extends Controller
      */
     // public function __construct()
     // {
-    //     $this->authorizeResource(Task::class, 'edit');
+    //     $this->middleware('auth')->except('index', 'show');
+    //     $this->authorizeResource(Task::class, 'task');
     // }
     /**
      * Display a listing of the resource.
@@ -153,9 +154,10 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $task = Task::findOrFail($task->id);
-        $user = auth()->user();
-        $taskPolicy = new TaskPolicy();
-        if ($taskPolicy->delete($user, $task)) {
+        // $user = auth()->user();
+        // $taskPolicy = new TaskPolicy();
+        // if ($taskPolicy->delete($user, $task)) {
+        if ($task) {
             $task->delete();
             flash(__('messages.Task deleted successfully!'))->success();
         } else {
