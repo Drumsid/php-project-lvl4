@@ -152,6 +152,7 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $task = Task::findOrFail($task->id);
+        $task->labels()->detach();
         $task->delete();
         flash(__('messages.Task deleted successfully!'))->success();
         return redirect()->route('tasks.index');
