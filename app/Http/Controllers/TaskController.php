@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Models\Label;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
-use App\Policies\TaskPolicy;
 
 class TaskController extends Controller
 {
@@ -18,11 +17,10 @@ class TaskController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth')->except('index', 'show');
-    //     $this->authorizeResource(Task::class, 'task');
-    // }
+    public function __construct()
+    {
+        $this->authorizeResource(Task::class);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -154,15 +152,8 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $task = Task::findOrFail($task->id);
-        // $user = auth()->user();
-        // $taskPolicy = new TaskPolicy();
-        // if ($taskPolicy->delete($user, $task)) {
-        if ($task) {
-            $task->delete();
-            flash(__('messages.Task deleted successfully!'))->success();
-        } else {
-            flash(__('messages.Action is not possible!'))->success();
-        }
+        $task->delete();
+        flash(__('messages.Task deleted successfully!'))->success();
         return redirect()->route('tasks.index');
     }
 

@@ -55,16 +55,23 @@ class TaskControllerTest extends TestCase
     public function testEdit()
     {
         $task = Task::factory()->create();
-        $response = $this->get(route('tasks.edit', [$task]));
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+                    ->withSession(['banned' => false])
+                    ->get(route('tasks.edit', [$task]));
         $response->assertOk();
     }
 
     public function testUpdate()
     {
         $task = Task::factory()->create();
+        $user = User::find(1);
+
         $factoryData = Task::factory()->make()->toArray();
         $data = Arr::only($factoryData, ['name', 'status_id', 'created_by_id', 'assigned_to_id', 'description']);
-        $response = $this->patch(route('tasks.update', $task), $data);
+        $response = $this->actingAs($user)
+                    ->withSession(['banned' => false])
+                    ->patch(route('tasks.update', $task), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 
@@ -74,9 +81,7 @@ class TaskControllerTest extends TestCase
     public function testDestroy()
     {
         $task = Task::factory()->create();
-        // print_r($task);
         $user = User::find(1);
-        // print_r($user);
         $response = $this->actingAs($user)
                     ->withSession(['banned' => false])
                     ->delete(route('tasks.destroy', [$task]));

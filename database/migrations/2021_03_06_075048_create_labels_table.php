@@ -19,6 +19,13 @@ class CreateLabelsTable extends Migration
             $table->string('description')->nullable();
             $table->timestamps();
         });
+
+        // Schema::create('labels', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('name')->unique();
+        //     $table->text('description')->nullable();
+        //     $table->timestamps();
+        // });
     }
 
     /**

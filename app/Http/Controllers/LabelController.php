@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Label;
+use Illuminate\Support\Facades\DB;
 
 class LabelController extends Controller
 {
@@ -93,6 +94,8 @@ class LabelController extends Controller
     {
         $label = Label::find($id);
         $tasks = $label->tasks->all();
+        // $tasks = $label->tasks->exists();
+        // dd(DB::table('label_task')->where('label_id', $label->id)->exists());
         if (count($tasks) > 0) {
             flash(__('messages.Action is not possible!'))->success();
             return redirect()->route('labels.index');
