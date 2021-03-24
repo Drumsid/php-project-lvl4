@@ -93,10 +93,7 @@ class LabelController extends Controller
     public function destroy($id)
     {
         $label = Label::find($id);
-        $tasks = $label->tasks->all();
-        // $tasks = $label->tasks->exists();
-        // dd(DB::table('label_task')->where('label_id', $label->id)->exists());
-        if (count($tasks) > 0) {
+        if ($label->tasks()->exists()) {
             flash(__('messages.Action is not possible!'))->success();
             return redirect()->route('labels.index');
         }
