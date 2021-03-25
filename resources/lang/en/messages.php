@@ -75,4 +75,5 @@ return [
     'Сreate' => 'Сreate',
     'Registers' => 'Registers',
     'Action is not possible' => 'Action is not possible!',
+    'Enter' => 'Enter'
 ];

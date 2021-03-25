@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'Login' => 'Войти',
-    'E-Mail Address' => 'Адрес почты',
+    'Login' => 'Вход',
+    'E-Mail Address' => 'Email',
     'Password' => 'Пароль',
     'Remember Me' => 'Запомнить меня',
     'Forgot Your Password?' => 'Забыли пароль?',
     'Register' => 'Регистрация',
     'Name' => 'Имя',
-    'Confirm Password' => 'Повторите пароль',
+    'Confirm Password' => 'Подтверждение',
     'Verify Your Email Address' => 'Проверьте свой адрес электронной почты',
     'A fresh verification link has been sent to your email address.' => 'На ваш адрес электронной почты была отправлена ​​новая ссылка для подтверждения.',
     'Before proceeding, please check your email for a verification link.' => 'Прежде чем продолжить, проверьте свою электронную почту на наличие ссылки для подтверждения.',
@@ -75,4 +75,5 @@ return [
     'Сreate' => 'Создать',
     'Registers' => 'Зарегистрировать',
     'Action is not possible!' => 'Действие не возможно!',
+    'Enter' => 'Войти'
 ];
