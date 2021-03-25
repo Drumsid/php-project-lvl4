@@ -18,7 +18,7 @@ return [
     'Reset Password.' => 'Сброс пароля',
     'Send Password Reset Link' => 'Отправить ссылку для сброса пароля',
     'Toggle navigation' => 'Переключить навигацию',
-    'Logout' => 'Выйти',
+    'Logout' => 'Выход',
     'Task manager' => 'Менеджер задач',
     'Tasks' => 'Задачи',
     'Statuses' => 'Статусы',
