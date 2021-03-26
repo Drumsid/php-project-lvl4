@@ -32,26 +32,14 @@
                             <a href="{{ route('task_statuses.edit', ['task_status' => $status->id]) }}" class="btn btn-info btn-sm float-left mr-1">
                                 {{ __('messages.edit') }}
                             </a>
-                            <a href="" class="btn btn-danger btn-sm" 
-                            onclick="return confirm('Подтвердите удаление');
-                            document.getElementById('taskStatusDelete').submit();"
-                            >{{ __('messages.delete') }}</a>
-                            <form id="taskStatusDelete" action="{{ route('task_statuses.destroy', ['task_status' => $status->id]) }}" method="post" class="float-left">
-                                @csrf
-                                @method('DELETE')
-                                {{-- <button type="submit" class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Подтвердите удаление')">
-                                    {{ __('messages.delete') }}
-                                </button> --}}
-                            </form>
-                            {{-- <form action="{{ route('task_statuses.destroy', ['task_status' => $status->id]) }}" method="post" class="float-left">
+                            <form action="{{ route('task_statuses.destroy', ['task_status' => $status->id]) }}" method="post" class="float-left">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm"
                                         onclick="return confirm('Подтвердите удаление')">
                                     {{ __('messages.delete') }}
                                 </button>
-                            </form> --}}
+                            </form>
                         </td>
                         @endauth
                       </tr>
