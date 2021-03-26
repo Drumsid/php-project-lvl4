@@ -42,7 +42,7 @@
                         <td><a href="{{ route('tasks.show', $task) }}">{{ $task->name }}</a></td>
                         <td>{{ $task->createdBy->name }}</td>
                         <td>{{ $asigned = $task->assignedTo->name ?? null }}</td>
-                        <td>{{ $task->updated_at }}</td>
+                        <td>{{ $task->created_at->format('d.m.Y') }}</td>
                         @auth
                         <td>
                             <a href="{{ route('tasks.edit', ['task' => $task->id]) }}" class="btn btn-info btn-sm float-left mr-1">
