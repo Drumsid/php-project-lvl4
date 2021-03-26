@@ -25,7 +25,7 @@
                     <tbody>
                         @foreach($labels as $label)    
                       <tr>
-                        <th>{{ $label->id }}</th>
+                        <td>{{ $label->id }}</td>
                         <td>{{ $label->name }}</td>
                         <td>{{ $label->description }}</td>
                         <td>{{ $label->updated_at }}</td>

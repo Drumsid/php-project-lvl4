@@ -24,7 +24,7 @@
                     <tbody>
                         @foreach($taskStatuses as $status)    
                       <tr>
-                        <th>{{ $status->id }}</th>
+                        <td>{{ $status->id }}</td>
                         <td>{{ $status->name }}</td>
                         <td>{{ $status->updated_at }}</td>
                         @auth
