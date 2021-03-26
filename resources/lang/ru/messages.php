@@ -75,5 +75,6 @@ return [
     'Сreate' => 'Создать',
     'Registers' => 'Зарегистрировать',
     'Action is not possible!' => 'Действие не возможно',
-    'Enter' => 'Войти'
+    'Enter' => 'Войти',
+    'Are you sure' => 'Вы уверены?',
 ];

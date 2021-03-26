@@ -34,14 +34,9 @@
                             <a href="{{ route('labels.edit', ['label' => $label->id]) }}" class="btn btn-info btn-sm float-left mr-1">
                                 {{ __('messages.edit') }}
                             </a>
-                            <form action="{{ route('labels.destroy', ['label' => $label->id]) }}" method="post" class="float-left">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Подтвердите удаление')">
-                                    {{ __('messages.delete') }}
-                                </button>
-                            </form>
+                            <a href="{{ route('labels.destroy', ['label' => $label->id]) }}" data-confirm="{{ __('messages.Are you sure') }}" data-method="delete" rel="nofollow" class="btn btn-danger btn-sm float-left mr-1">
+                              {{ __('messages.delete') }}
+                            </a>
                         </td>
                         @endauth
                       </tr>

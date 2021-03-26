@@ -48,16 +48,9 @@
                             <a href="{{ route('tasks.edit', ['task' => $task->id]) }}" class="btn btn-info btn-sm float-left mr-1">
                                 {{ __('messages.edit') }}
                             </a>
-                        @can('delete', $task)
-                            <form action="{{ route('tasks.destroy', ['task' => $task->id]) }}" method="post" class="float-left">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Подтвердите удаление')">
-                                    {{ __('messages.delete') }}
-                                </button>
-                            </form>
-                        @endcan
+                            <a href="{{ route('tasks.destroy', ['task' => $task->id]) }}" data-confirm="{{ __('messages.Are you sure') }}" data-method="delete" rel="nofollow" class="btn btn-danger btn-sm float-left mr-1">
+                              {{ __('messages.delete') }}
+                            </a>
                         </td>
                         @endauth
                       </tr>
