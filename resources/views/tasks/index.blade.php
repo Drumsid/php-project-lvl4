@@ -48,9 +48,11 @@
                             <a href="{{ route('tasks.edit', ['task' => $task->id]) }}" class="btn btn-info btn-sm float-left mr-1">
                                 {{ __('messages.edit') }}
                             </a>
+                            @can('delete', $task)
                             <a href="{{ route('tasks.destroy', ['task' => $task->id]) }}" data-confirm="{{ __('messages.Are you sure') }}" data-method="delete" rel="nofollow" class="btn btn-danger btn-sm float-left mr-1">
                               {{ __('messages.delete') }}
                             </a>
+                            @endcan
                         </td>
                         @endauth
                       </tr>

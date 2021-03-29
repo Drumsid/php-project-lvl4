@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Label;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -62,7 +63,12 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $user = Auth::user();
+
+        if (!isset($user)) {
+                throw new \Exception('User is not authenticated');
+        }
+        $data = $this->validate($request, [
             'name' => 'required|min:3',
             'status_id' => 'required',
             'created_by_id' => 'required',
@@ -70,11 +76,10 @@ class TaskController extends Controller
             'description' => 'nullable',
         ]);
 
-        $data = $request->all();
-
-        $task = Task::create($data);
-        $task->labels()->sync($request->labels);
+        $task = $user->tasks()->make($data);
         $task->save();
+        $task->labels()->sync($request->labels);
+
         flash(__('messages.Task added successfully!'))->success();
         return redirect()
             ->route('tasks.index');
