@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+{{-- <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
-            <h2 class="mb-5">{{ __('messages.Tasks') }}</h2>
+        <div class="col-md-12"> --}}
+            <h1 class="mb-5">{{ __('messages.Tasks') }}</h2>
             <div class="d-flex  mb-5 justify-content-between">
               {{Form::open([ 'method' => 'GET', 'class' => 'form-inline'])}}
                 {{Form::select('filter[status_id]', ['' => __('messages.Status')] + $taskStatuses, null, ['class' => 'form-control mr-2'])}}
@@ -19,7 +19,7 @@
               </div>
           </div>
             {{-- <div class="table-responsive"> --}}
-                <table class="table">
+                <table class="table mt-2">
                     <thead>
                       <tr>
                         <th scope="col">ID</th>
@@ -63,7 +63,7 @@
                     </tbody>
                   </table>
               {{-- </div> --}}
-        </div>
+        {{-- </div>
     </div>
-</div>
+</div> --}}
 @endsection
