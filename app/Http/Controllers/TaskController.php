@@ -63,11 +63,6 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
-
-        if (!isset($user)) {
-                throw new \Exception('User is not authenticated');
-        }
         $data = $this->validate($request, [
             'name' => 'required|min:3',
             'status_id' => 'required',
@@ -75,6 +70,11 @@ class TaskController extends Controller
             'assigned_to_id' => 'nullable',
             'description' => 'nullable',
         ]);
+        $user = Auth::user();
+
+        if (!isset($user)) {
+                throw new \Exception('User is not authenticated');
+        }
 
         $task = $user->tasks()->make($data);
         $task->save();
