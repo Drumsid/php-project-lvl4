@@ -53,7 +53,6 @@ class TaskPolicy
      */
     public function update(User $user, Task $task)
     {
-        // return auth()->user() ? true : false;
         return true;
     }
 

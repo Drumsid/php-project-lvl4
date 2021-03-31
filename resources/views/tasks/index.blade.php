@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- <div class="container">
+<div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12"> --}}
+        <div class="col-md-12">
             <h1 class="mb-5">{{ __('messages.Tasks') }}</h2>
             <div class="d-flex  mb-5 justify-content-between">
               {{Form::open([ 'method' => 'GET', 'class' => 'form-inline'])}}
@@ -18,7 +18,7 @@
               @endauth
               </div>
           </div>
-            {{-- <div class="table-responsive"> --}}
+            <div class="table-responsive">
                 <table class="table mt-2">
                     <thead>
                       <tr>
@@ -62,8 +62,8 @@
                     @endif
                     </tbody>
                   </table>
-              {{-- </div> --}}
-        {{-- </div>
+              </div>
+        </div>
     </div>
-</div> --}}
+</div>
 @endsection
