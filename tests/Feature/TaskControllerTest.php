@@ -33,7 +33,7 @@ class TaskControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function testStore()
+    public function testStore(): void
     {
         $factoryData = Task::factory()->make()->toArray();
         $data = Arr::only($factoryData, ['name', 'status_id', 'created_by_id', 'assigned_to_id', 'description']);
@@ -47,7 +47,7 @@ class TaskControllerTest extends TestCase
         $this->assertDatabaseHas('tasks', $data);
     }
 
-    public function testShow()
+    public function testShow(): void
     {
         TaskStatus::factory()->create();
         $task = Task::factory()->create();
@@ -55,7 +55,7 @@ class TaskControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function testEdit()
+    public function testEdit(): void
     {
         $task = Task::factory()->create();
         $user = User::find(1);
@@ -65,7 +65,7 @@ class TaskControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $task = Task::factory()->create();
         $user = User::find(1);
@@ -81,7 +81,7 @@ class TaskControllerTest extends TestCase
         $this->assertDatabaseHas('tasks', $data);
     }
 
-    public function testDestroy()
+    public function testDestroy(): void
     {
         $task = Task::factory()->create();
         $user = User::find(1);
