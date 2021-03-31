@@ -90,6 +90,9 @@ class TaskStatusController extends Controller
     public function destroy($id)
     {
         $taskStatus = TaskStatus::find($id);
+        if (is_null($taskStatus)) {
+            throw new \Exception("Status does not exist");
+        }
         if ($taskStatus->task()->exists()) {
             flash(__('messages.Action is not possible!'))->success();
             return redirect()->route('task_statuses.index');

@@ -105,6 +105,9 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         $task = Task::find($task->id);
+        if (is_null($task)) {
+            throw new \Exception("Task does not exist");
+        }
         $taskStatuses = TaskStatus::pluck('name', 'id')->all();
         $taskStatusesSelected = [];
         if (isset($task->status->id)) {
@@ -167,7 +170,7 @@ class TaskController extends Controller
         $collection = collect($labels);
 
         $filtered = $collection->filter(function ($name, $id) use ($task) {
-            if (in_array($id, $task->labels->pluck('id')->all())) {
+            if (in_array($id, $task->labels->pluck('id')->all(), false)) {
                 return $id;
             }
         });

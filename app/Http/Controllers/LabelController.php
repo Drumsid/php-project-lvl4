@@ -99,10 +99,8 @@ class LabelController extends Controller
             flash(__('messages.Action is not possible!'))->success();
             return redirect()->route('labels.index');
         }
-        // if ($label) {
         $label->delete();
         flash(__('messages.Label deleted successfully!'))->success();
-        // }
         return redirect()->route('labels.index');
     }
 }
