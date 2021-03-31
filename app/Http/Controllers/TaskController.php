@@ -66,7 +66,6 @@ class TaskController extends Controller
         $data = $this->validate($request, [
             'name' => 'required|min:3',
             'status_id' => 'required',
-            'created_by_id' => 'required',
             'assigned_to_id' => 'nullable',
             'description' => 'nullable',
         ]);
