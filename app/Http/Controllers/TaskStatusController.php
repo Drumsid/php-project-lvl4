@@ -97,10 +97,8 @@ class TaskStatusController extends Controller
             flash(__('messages.Action is not possible!'))->success();
             return redirect()->route('task_statuses.index');
         }
-        if ($taskStatus) {
-            $taskStatus->delete();
-            flash(__('messages.Status deleted successfully!'))->success();
-        }
+        $taskStatus->delete();
+        flash(__('messages.Status deleted successfully!'))->success();
         return redirect()->route('task_statuses.index');
     }
 }
