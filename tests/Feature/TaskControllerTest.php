@@ -38,6 +38,9 @@ class TaskControllerTest extends TestCase
         $factoryData = Task::factory()->make()->toArray();
         $data = Arr::only($factoryData, ['name', 'status_id', 'created_by_id', 'assigned_to_id', 'description']);
         $user = User::find(1);
+        if (!isset($user)) {
+                throw new \Exception('User is not authenticated');
+        }
         $response = $this->actingAs($user)
                     ->withSession(['banned' => false])
                     ->post(route('tasks.store'), $data);

@@ -51,12 +51,8 @@ class TaskPolicy
      * @param  \App\Models\Task  $task
      * @return mixed
      */
-    public function update(?User $user, Task $task)
+    public function update(User $user, Task $task)
     {
-        // if (is_null($user)) {
-        //     return false;
-        // }
-        // return true;
         return auth()->user() ? true : false;
     }
 
