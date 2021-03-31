@@ -92,6 +92,9 @@ class LabelController extends Controller
     public function destroy($id)
     {
         $label = Label::find($id);
+        if (is_null($label)) {
+            throw new \Exception("Label does not exist");
+        }
         if ($label->tasks()->exists()) {
             flash(__('messages.Action is not possible!'))->success();
             return redirect()->route('labels.index');

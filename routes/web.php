@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskStatusController;
 use App\Http\Controllers\TaskController;
-use App\Http\Controllers\TestController;
 use App\Http\Controllers\LabelController;
 
 /*
@@ -17,7 +16,7 @@ use App\Http\Controllers\LabelController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function (): Illuminate\View\View {
     return view('welcome');
 });
 
