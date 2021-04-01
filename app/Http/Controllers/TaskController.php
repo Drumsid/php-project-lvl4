@@ -24,10 +24,10 @@ class TaskController extends Controller
     }
     /**
      * Display a listing of the resource.
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         $taskStatuses = TaskStatus::pluck('name', 'id')->all();
         $users = User::pluck('name', 'id')->all();
@@ -38,7 +38,8 @@ class TaskController extends Controller
                     AllowedFilter::exact('assigned_to_id'),
                 ])
                 ->get();
-        return view('tasks.index', compact('tasks', 'taskStatuses', 'users'));
+        $filter = $request->get('filter');
+        return view('tasks.index', compact('tasks', 'taskStatuses', 'users', 'filter'));
     }
 
     /**

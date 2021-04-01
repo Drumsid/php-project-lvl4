@@ -7,9 +7,9 @@
             <h1 class="mb-5">{{ __('messages.Tasks') }}</h2>
             <div class="d-flex  mb-5 justify-content-between">
               {{Form::open([ 'method' => 'GET', 'class' => 'form-inline'])}}
-                {{Form::select('filter[status_id]', ['' => __('messages.Status')] + $taskStatuses, null, ['class' => 'form-control mr-2'])}}
-                {{Form::select('filter[created_by_id]', ['' => __('messages.Author')] + $users, null, ['class' => 'form-control mr-2'])}}
-                {{Form::select('filter[assigned_to_id]', ['' => __('messages.Executor')] + $users, null, ['class' => 'form-control mr-2'])}}
+                {{Form::select('filter[status_id]', ['' => __('messages.Status')] + $taskStatuses, $filter['status_id'] ?? null, ['class' => 'form-control mr-2'])}}
+                {{Form::select('filter[created_by_id]', ['' => __('messages.Author')] + $users, $filter['created_by_id'] ?? null, ['class' => 'form-control mr-2'])}}
+                {{Form::select('filter[assigned_to_id]', ['' => __('messages.Executor')] + $users, $filter['assigned_to_id'] ?? null, ['class' => 'form-control mr-2'])}}
                 {{Form::submit(__('messages.Apply'), ['class' => 'btn btn-outline-primary mr-2'])}}
               {{Form::close()}}
               <div>
