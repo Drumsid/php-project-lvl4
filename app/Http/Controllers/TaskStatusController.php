@@ -94,7 +94,7 @@ class TaskStatusController extends Controller
             throw new \Exception("Status does not exist");
         }
         if ($taskStatus->task()->exists()) {
-            flash(__('messages.Action is not possible!'))->success();
+            flash(__('messages.Action is not possible!'))->warning();
             return redirect()->route('task_statuses.index');
         }
         $taskStatus->delete();

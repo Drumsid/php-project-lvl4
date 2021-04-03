@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Label;
 use Illuminate\Support\Arr;
+use App\Models\User;
 
 class LabelControllerTest extends TestCase
 {
@@ -14,6 +15,9 @@ class LabelControllerTest extends TestCase
     {
         parent::setUp();
         Label::factory()->count(2)->make();
+        User::factory(1)->create();
+        $user = User::find(1);
+        $this->actingAs($user);
     }
 
     public function testIndex(): void

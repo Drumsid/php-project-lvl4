@@ -8,6 +8,15 @@ use App\Models\Label;
 class LabelController extends Controller
 {
     /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Label::class);
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\View\View
@@ -96,7 +105,7 @@ class LabelController extends Controller
             throw new \Exception("Label does not exist");
         }
         if ($label->tasks()->exists()) {
-            flash(__('messages.Action is not possible!'))->success();
+            flash(__('messages.Action is not possible!'))->warning();
             return redirect()->route('labels.index');
         }
         $label->delete();
