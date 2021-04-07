@@ -12,6 +12,8 @@ use Illuminate\Support\Arr;
 
 class TaskControllerTest extends TestCase
 {
+    private User $user;
+
     protected function setUp(): void
     {
         parent::setUp();

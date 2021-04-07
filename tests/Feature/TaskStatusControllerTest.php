@@ -11,6 +11,8 @@ use App\Models\User;
 
 class TaskStatusControllerTest extends TestCase
 {
+    private User $user;
+
     protected function setUp(): void
     {
         parent::setUp();

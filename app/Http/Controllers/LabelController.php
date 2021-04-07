@@ -63,7 +63,7 @@ class LabelController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Label  $label
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(Label $label)
     {
@@ -75,7 +75,7 @@ class LabelController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Label  $label
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Label $label)
     {
@@ -98,9 +98,6 @@ class LabelController extends Controller
      */
     public function destroy(Label $label)
     {
-        // if (is_null($label)) {
-        //     throw new \Exception("Label does not exist");
-        // }
         if ($label->tasks()->exists()) {
             flash(__('messages.Action is not possible!'))->warning();
             return redirect()->route('labels.index');
