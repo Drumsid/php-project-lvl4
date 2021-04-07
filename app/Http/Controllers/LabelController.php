@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Label;
+use Illuminate\Http\Request;
 
 class LabelController extends Controller
 {
@@ -19,7 +19,7 @@ class LabelController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -30,7 +30,7 @@ class LabelController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -42,7 +42,7 @@ class LabelController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -62,12 +62,11 @@ class LabelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\View\View
+     * @param  \App\Models\Label  $label
+     * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Label $label)
     {
-        $label = Label::findOrFail($id);
         return view('labels.edit', compact('label'));
     }
 
@@ -75,12 +74,11 @@ class LabelController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param  \App\Models\Label  $label
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Label $label)
     {
-        $label = Label::findOrFail($id);
         $data = $this->validate($request, [
             'name' => 'required|unique:labels,name',
             'description' => 'nullable',
@@ -95,12 +93,11 @@ class LabelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param  \App\Models\Label  $label
+     * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Label $label)
     {
-        $label = Label::find($id);
         if (is_null($label)) {
             throw new \Exception("Label does not exist");
         }

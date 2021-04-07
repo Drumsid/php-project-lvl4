@@ -15,7 +15,7 @@ class TaskControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        User::factory(1)->create();
+        $this->user = User::factory()->create();
     }
 
     public function testIndex(): void
@@ -26,9 +26,7 @@ class TaskControllerTest extends TestCase
 
     public function testCreate(): void
     {
-        $user = User::factory()->create();
-        $response = $this->actingAs($user)
-                         ->withSession(['banned' => false])
+        $response = $this->actingAs($this->user)
                          ->get(route('tasks.create'));
         $response->assertOk();
     }
@@ -37,12 +35,7 @@ class TaskControllerTest extends TestCase
     {
         $factoryData = Task::factory()->make()->toArray();
         $data = Arr::only($factoryData, ['name', 'status_id', 'created_by_id', 'assigned_to_id', 'description']);
-        $user = User::find(1);
-        if (!isset($user)) {
-                throw new \Exception('User is not authenticated');
-        }
-        $response = $this->actingAs($user)
-                    ->withSession(['banned' => false])
+        $response = $this->actingAs($this->user)
                     ->post(route('tasks.store'), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
@@ -61,12 +54,7 @@ class TaskControllerTest extends TestCase
     public function testEdit(): void
     {
         $task = Task::factory()->create();
-        $user = User::find(1);
-        if (!isset($user)) {
-                throw new \Exception('User is not authenticated');
-        }
-        $response = $this->actingAs($user)
-                    ->withSession(['banned' => false])
+        $response = $this->actingAs($this->user)
                     ->get(route('tasks.edit', [$task]));
         $response->assertOk();
     }
@@ -74,14 +62,9 @@ class TaskControllerTest extends TestCase
     public function testUpdate(): void
     {
         $task = Task::factory()->create();
-        $user = User::find(1);
-        if (!isset($user)) {
-                throw new \Exception('User is not authenticated');
-        }
         $factoryData = Task::factory()->make()->toArray();
         $data = Arr::only($factoryData, ['name', 'status_id', 'created_by_id', 'assigned_to_id', 'description']);
-        $response = $this->actingAs($user)
-                    ->withSession(['banned' => false])
+        $response = $this->actingAs($this->user)
                     ->patch(route('tasks.update', $task), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
@@ -92,12 +75,7 @@ class TaskControllerTest extends TestCase
     public function testDestroy(): void
     {
         $task = Task::factory()->create();
-        $user = User::find(1);
-        if (!isset($user)) {
-                throw new \Exception('User is not authenticated');
-        }
-        $response = $this->actingAs($user)
-                    ->withSession(['banned' => false])
+        $response = $this->actingAs($this->user)
                     ->delete(route('tasks.destroy', [$task]));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();

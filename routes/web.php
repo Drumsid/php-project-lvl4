@@ -22,8 +22,8 @@ Route::get('/', function (): Illuminate\View\View {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::resource('task_statuses', TaskStatusController::class);
-Route::resource('tasks', TaskController::class);
-Route::resource('labels', LabelController::class);
+Route::resources([
+    'task_statuses' => TaskStatusController::class,
+    'tasks' => TaskController::class,
+    'labels' => LabelController::class,
+]);

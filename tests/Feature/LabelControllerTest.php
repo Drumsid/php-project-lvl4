@@ -15,9 +15,7 @@ class LabelControllerTest extends TestCase
     {
         parent::setUp();
         Label::factory()->count(2)->make();
-        User::factory(1)->create();
-        $user = User::find(1);
-        $this->actingAs($user);
+        $this->user = User::factory()->create();
     }
 
     public function testIndex(): void
@@ -28,7 +26,8 @@ class LabelControllerTest extends TestCase
 
     public function testCreate(): void
     {
-        $response = $this->get(route('labels.create'));
+        $response = $this->actingAs($this->user)
+            ->get(route('labels.create'));
         $response->assertOk();
     }
 
@@ -36,7 +35,8 @@ class LabelControllerTest extends TestCase
     {
         $factoryData = Label::factory()->make()->toArray();
         $data = Arr::only($factoryData, ['name']);
-        $response = $this->post(route('labels.store'), $data);
+        $response = $this->actingAs($this->user)
+            ->post(route('labels.store'), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 
@@ -46,7 +46,8 @@ class LabelControllerTest extends TestCase
     public function testEdit(): void
     {
         $label = Label::factory()->create();
-        $response = $this->get(route('labels.edit', [$label]));
+        $response = $this->actingAs($this->user)
+            ->get(route('labels.edit', [$label]));
         $response->assertOk();
     }
 
@@ -55,7 +56,8 @@ class LabelControllerTest extends TestCase
         $label = Label::factory()->create();
         $factoryData = Label::factory()->make()->toArray();
         $data = Arr::only($factoryData, ['name']);
-        $response = $this->patch(route('labels.update', $label), $data);
+        $response = $this->actingAs($this->user)
+            ->patch(route('labels.update', $label), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 
@@ -65,7 +67,8 @@ class LabelControllerTest extends TestCase
     public function testDestroy(): void
     {
         $label = Label::factory()->create();
-        $response = $this->delete(route('labels.destroy', [$label]));
+        $response = $this->actingAs($this->user)
+            ->delete(route('labels.destroy', [$label]));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 

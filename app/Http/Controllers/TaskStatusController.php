@@ -2,15 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\TaskStatus;
+use Illuminate\Http\Request;
 
 class TaskStatusController extends Controller
 {
     /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(TaskStatus::class);
+    }
+    /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -21,7 +30,7 @@ class TaskStatusController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -33,7 +42,7 @@ class TaskStatusController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -52,12 +61,11 @@ class TaskStatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\View\View
+     * @param  \App\Models\TaskStatus  $taskStatus
+     * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(TaskStatus $taskStatus)
     {
-        $taskStatus = TaskStatus::findOrFail($id);
         return view('taskStatus.edit', compact('taskStatus'));
     }
 
@@ -65,12 +73,11 @@ class TaskStatusController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param  \App\Models\TaskStatus  $taskStatus
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, TaskStatus $taskStatus)
     {
-        $taskStatus = TaskStatus::findOrFail($id);
         $data = $this->validate($request, [
             'name' => 'required|unique:task_statuses,name'
         ]);
@@ -84,12 +91,11 @@ class TaskStatusController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param  \App\Models\TaskStatus  $taskStatus
+     * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(TaskStatus $taskStatus)
     {
-        $taskStatus = TaskStatus::find($id);
         if (is_null($taskStatus)) {
             throw new \Exception("Status does not exist");
         }

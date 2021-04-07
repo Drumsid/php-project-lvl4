@@ -6,7 +6,7 @@ use App\Models\TaskStatus;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TaskStatusPolicy1
+class TaskStatusPolicy
 {
     use HandlesAuthorization;
 
