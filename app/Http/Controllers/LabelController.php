@@ -19,7 +19,7 @@ class LabelController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -30,7 +30,7 @@ class LabelController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -42,7 +42,7 @@ class LabelController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -94,13 +94,13 @@ class LabelController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Label  $label
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Label $label)
     {
-        if (is_null($label)) {
-            throw new \Exception("Label does not exist");
-        }
+        // if (is_null($label)) {
+        //     throw new \Exception("Label does not exist");
+        // }
         if ($label->tasks()->exists()) {
             flash(__('messages.Action is not possible!'))->warning();
             return redirect()->route('labels.index');
