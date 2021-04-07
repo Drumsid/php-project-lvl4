@@ -93,7 +93,6 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        $task = Task::findOrFail($task->id);
         return view('tasks.show', compact('task'));
     }
 
@@ -105,10 +104,6 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        $task = Task::find($task->id);
-        if (is_null($task)) {
-            throw new \Exception("Task does not exist");
-        }
         $taskStatuses = TaskStatus::pluck('name', 'id')->all();
         $taskStatusesSelected = [];
         if (isset($task->status->id)) {
@@ -140,7 +135,6 @@ class TaskController extends Controller
             'assigned_to_id' => 'nullable',
         ]);
 
-        $task = Task::findOrFail($task->id);
         $data = $request->all();
 
         $task->update($data);
@@ -159,7 +153,6 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        $task = Task::findOrFail($task->id);
         $task->labels()->detach();
         $task->delete();
         flash(__('messages.Task deleted successfully!'))->success();
